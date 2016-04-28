@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="GestionLocationVoiture:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/GestionLocationVoiture_jar</output-path>
+  <artifact type="jar" build-on-make="true" name="GestionLocationVoiture:jar">
+    <output-path>$PROJECT_DIR$/out/production</output-path>
     <root id="archive" name="GestionLocationVoiture.jar">
       <element id="module-output" name="GestionLocationVoiture" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ch/inftec/ju/ju-jasypt/4.5.1-11/ju-jasypt-4.5.1-11.jar" path-in-jar="/" />
