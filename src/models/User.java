@@ -14,7 +14,7 @@ public class User {
     private String email;
     private String phone;
 
-    // User constructor
+    // Constructor
 
     public User(int id,String first_name, String last_name, String sexe, String email, String phone){
         this.id = id;
@@ -25,4 +25,29 @@ public class User {
         this.phone = phone;
     }
 
+    // Getters
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
 }
