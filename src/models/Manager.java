@@ -6,8 +6,8 @@ package models;
 public class Manager extends User {
 
     // Constructor
-    public Manager(int id,String first_name, String last_name, String sexe, String email, String phone){
-        super(id, first_name, last_name, sexe, email, phone);
+    public Manager(int id,String firstName, String last_name, String sexe, String email, String phone){
+        super(id, firstName, last_name, sexe, email, phone);
     }
 
 }

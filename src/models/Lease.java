@@ -7,21 +7,21 @@ import java.util.Date;
  */
 public class Lease extends Order {
 
-    // Add attribute : end_date
+    // Attributes
 
-    private Date end_date;
+    private Date endDate;
 
     // Constructor
 
-    public Lease(double cost, Date date, int id, int supplier_id, int vehicule_id, Date end_date){
-        super(cost, date, id, supplier_id, vehicule_id);
-        this.end_date = end_date;
+    public Lease(double cost, Date date, int id, int supplierId, int vehiculeId, Date endDate){
+        super(cost, date, id, supplierId, vehiculeId);
+        this.endDate = endDate;
     }
 
-    // Add end_date getter
+    // Getters
 
-
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
+    
 }
