@@ -7,6 +7,7 @@ import models.User;
  */
 
 interface AuthenticationDelegate {
+
     void authenticationDidSucceedWithUser(User user);
     void authenticationDidFailWithError(Error error);
 }
