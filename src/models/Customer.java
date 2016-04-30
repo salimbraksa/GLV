@@ -15,10 +15,10 @@ public class Customer extends User{
 
     // Constructor
 
-    public Customer(int id, String first_name, String last_name, String sexe, String email,
+    public Customer(int id, String firstName, String lastName, String sexe, String email,
                     String phone, String assiduity, String cin, Date birthday){
 
-        super(id, first_name, last_name, sexe, email, phone);
+        super(id, firstName, lastName, sexe, email, phone);
         this.assiduity = assiduity;
         this.cin = cin;
         this.birthday = birthday;

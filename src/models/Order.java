@@ -11,18 +11,18 @@ public class Order {
 
     private int id;
     private double cost;
-    private int supplier_id;
-    private int vehicule_id;
+    private int supplierId;
+    private int vehiculeId;
     private Date date;
 
     // Construtor
 
-    public Order(double cost, Date date, int id, int supplier_id, int vehicule_id) {
+    public Order(double cost, Date date, int id, int supplierId, int vehiculeId) {
         this.cost = cost;
         this.date = date;
         this.id = id;
-        this.supplier_id = supplier_id;
-        this.vehicule_id = vehicule_id;
+        this.supplierId = supplierId;
+        this.vehiculeId = vehiculeId;
     }
 
     // Getters
@@ -39,11 +39,11 @@ public class Order {
         return id;
     }
 
-    public int getSupplier_id() {
-        return supplier_id;
+    public int getSupplierId() {
+        return supplierId;
     }
 
-    public int getVehicule_id() {
-        return vehicule_id;
+    public int getVehiculeId() {
+        return vehiculeId;
     }
 }
