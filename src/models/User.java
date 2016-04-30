@@ -8,18 +8,18 @@ public class User {
     // User attributes
 
     private int id;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String sexe;
     private String email;
     private String phone;
 
     // Constructor
 
-    public User(int id,String first_name, String last_name, String sexe, String email, String phone){
+    public User(int id, String firstName, String lastName, String sexe, String email, String phone){
         this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.sexe = sexe;
         this.email = email;
         this.phone = phone;
@@ -31,16 +31,16 @@ public class User {
         return email;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getPhone() {
