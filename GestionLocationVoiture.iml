@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="ch.inftec.ju:ju-jasypt:4.5.1-11" level="project" />
-    <orderEntry type="library" name="org.wisdom-framework:mysql-connector-java:5.1.34_1" level="project" />
+    <orderEntry type="library" name="ch.inftec.ju:ju-jasypt:Latest" level="project" />
+    <orderEntry type="library" name="org.xerial:sqlite-jdbc:Latest" level="project" />
   </component>
 </module>
