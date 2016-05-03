@@ -22,8 +22,7 @@ public class Vehicule {
     }
 
     // Getters
-
-
+    
     public int getId() {
         return id;
     }
