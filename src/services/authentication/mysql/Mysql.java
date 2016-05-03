@@ -21,6 +21,7 @@ public class Mysql {
 
         try {
 
+
             // register the driver
             String sDriverName = "org.sqlite.JDBC";
             Class.forName(sDriverName);
