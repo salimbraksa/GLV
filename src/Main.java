@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import services.authentication.mysql.Mysql;
 
 public class Main extends Application {
@@ -16,7 +17,9 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         Mysql mysql = Mysql.sharedInstance();
 
-        
+        StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+        String encrypted = encryptor.encryptPassword("021991");
+        System.out.println(encrypted);
 
 
     }
