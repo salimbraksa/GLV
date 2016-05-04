@@ -1,4 +1,4 @@
-package services.authentication.mysql;
+package services.mysql;
 
 import java.sql.*;
 
