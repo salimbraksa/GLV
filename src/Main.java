@@ -17,11 +17,6 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         Mysql mysql = Mysql.sharedInstance();
 
-        StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
-        String encrypted = encryptor.encryptPassword("021991");
-        System.out.println(encrypted);
-
-
     }
 
     public static void main(String[] args) {
