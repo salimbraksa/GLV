@@ -19,8 +19,14 @@ public class Mysql {
 
     private Mysql() {
 
+    }
+
+    // Connection
+
+    private void connect() {
+
         try {
-            
+
             // register the driver
             String sDriverName = "org.sqlite.JDBC";
             Class.forName(sDriverName);
@@ -52,9 +58,11 @@ public class Mysql {
     public void executeUpdate(String update) {
         Statement stmt = null;
         try {
+            connect();
             stmt = connection.createStatement();
             stmt.executeUpdate(update);
-
+            stmt.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

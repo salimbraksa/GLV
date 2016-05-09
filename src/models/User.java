@@ -5,7 +5,7 @@ import helpers.interfaces.ModelNameable;
 /**
  * Created by Salim on 4/27/16.
  */
-public class User implements ModelNameable {
+public abstract class User implements ModelNameable {
 
     public enum Sexe {
         Male,
@@ -70,8 +70,6 @@ public class User implements ModelNameable {
     // Model Nameable Implementation
 
     @Override
-    public String getModelName() {
-        return "user";
-    }
+    public abstract String getModelName();
 
 }

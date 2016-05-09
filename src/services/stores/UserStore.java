@@ -23,7 +23,6 @@ public class UserStore implements StoreType<User> {
 
     @Override
     public void create(User object) {
-
     }
 
     @Override

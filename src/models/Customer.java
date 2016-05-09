@@ -15,10 +15,10 @@ public class Customer extends User{
 
     // Constructor
 
-    public Customer(int id, String firstName, String lastName, String sexe, String email,
+    public Customer(int id, String firstName, String lastName, Sexe sexe, String email,
                     String phone, String assiduity, String cin, Date birthday){
-
         super(id, firstName, lastName, sexe, email, phone);
+
         this.assiduity = assiduity;
         this.cin = cin;
         this.birthday = birthday;
@@ -37,4 +37,12 @@ public class Customer extends User{
     public String getAssiduity() {
         return assiduity;
     }
+
+    // Model Nameable Implementation
+
+    @Override
+    public String getModelName() {
+        return "customer";
+    }
+
 }
