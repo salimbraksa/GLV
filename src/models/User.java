@@ -5,18 +5,38 @@ package models;
  */
 public class User {
 
+    public enum Sexe {
+
+        // Cases
+
+        Male,
+        Female;
+
+        // Methods
+
+        public String rawValue() {
+            switch (this) {
+                case Male: return "male";
+                case Female: return "female";
+            }
+            return null;
+        }
+
+
+    }
+
     // User attributes
 
     private int id;
     private String firstName;
     private String lastName;
-    private String sexe;
+    private Sexe sexe;
     private String email;
     private String phone;
 
     // Constructor
 
-    public User(int id, String firstName, String lastName, String sexe, String email, String phone){
+    public User(int id, String firstName, String lastName, Sexe sexe, String email, String phone){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,7 +67,7 @@ public class User {
         return phone;
     }
 
-    public String getSexe() {
+    public Sexe getSexe() {
         return sexe;
     }
 }
