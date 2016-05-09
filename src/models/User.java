@@ -1,18 +1,15 @@
 package models;
 
+import helpers.interfaces.ModelNameable;
+
 /**
  * Created by Salim on 4/27/16.
  */
-public class User {
+public class User implements ModelNameable {
 
     public enum Sexe {
-
-        // Cases
-
         Male,
         Female;
-
-        // Methods
 
         public String rawValue() {
             switch (this) {
@@ -21,7 +18,6 @@ public class User {
             }
             return null;
         }
-
 
     }
 
@@ -70,4 +66,12 @@ public class User {
     public Sexe getSexe() {
         return sexe;
     }
+
+    // Model Nameable Implementation
+
+    @Override
+    public String getModelName() {
+        return "user";
+    }
+
 }
