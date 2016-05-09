@@ -50,6 +50,9 @@ public class UserStore implements StoreType<User>  {
             String userLastName = result.getString("last_name");
             String userSexe = result.getString("sexe");
             String userEmail = result.getString("email");
+            String userPhone = result.getString("phone");
+            String userType = result.getString("type");
+            
 
 
 
