@@ -3,10 +3,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import models.Admin;
-import models.Employee;
-import models.User;
-import services.stores.EmployeeStore;
 
 public class Main extends Application {
 

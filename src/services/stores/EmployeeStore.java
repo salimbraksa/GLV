@@ -36,11 +36,12 @@ public class EmployeeStore implements StoreType<Employee> {
                          "VALUES ('"+ object.getFirstName() +"','"+ object.getLastName() +"','"+ object.getSexe().rawValue()
                          +"','"+ object.getEmail() +"','"+ object.getPhone() +"','"+ object.getModelName() +"','"+ encryptedPassword +"');";
         mysql.executeUpdate(request);
-        
+
     }
 
     @Override
     public void delete(int id) {
+        UserStore.sharedInstance().delete(id);
     }
 
     @Override
