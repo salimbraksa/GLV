@@ -42,8 +42,9 @@ public class UserStore implements StoreType<User>  {
     public User find(int id) {
         ResultSet result = mysql.executeQuery("SELECT * FROM user WHERE id="+id);
 
-        //Retrieve data by column name
+        //Retrieve data from database by column name
         try {
+
             int userId = result.getInt("id");
             String userFirstName = result.getString("first_name");
             String userLastName = result.getString("last_name");
@@ -51,16 +52,15 @@ public class UserStore implements StoreType<User>  {
             String userEmail = result.getString("email");
             String userPhone = result.getString("phone");
             String userType = result.getString("type");
-            
-
-
-
+            String userAssiduity = result.getString("assiduity");
+            String userBirthday = result.getString("birthday");
+            String userPassword = result.getString("password");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        ///User user = new User();
+
         return null;
     }
 
