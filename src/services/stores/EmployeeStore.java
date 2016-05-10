@@ -1,6 +1,7 @@
 package services.stores;
 
 import models.Employee;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import services.mysql.Mysql;
 
 import java.util.ArrayList;
@@ -29,18 +30,18 @@ public class EmployeeStore implements StoreType<Employee> {
     @Override
     public void create(Employee object) {
 
-        String encryptedPassword = "x";
+        StrongPasswordEncryptor strongPasswordEncryptor = new StrongPasswordEncryptor();
+        String encryptedPassword = strongPasswordEncryptor.encryptPassword(object.getPassword());
         String request = "INSERT INTO User (first_name, last_name, sexe, email, phone, type, password) " +
                          "VALUES ('"+ object.getFirstName() +"','"+ object.getLastName() +"','"+ object.getSexe().rawValue()
                          +"','"+ object.getEmail() +"','"+ object.getPhone() +"','"+ object.getModelName() +"','"+ encryptedPassword +"');";
-
-        System.out.println("Request: " + request);
-
         mysql.executeUpdate(request);
+
     }
 
     @Override
     public void delete(int id) {
+        UserStore.sharedInstance().delete(id);
     }
 
     @Override

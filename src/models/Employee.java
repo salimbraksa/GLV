@@ -16,4 +16,10 @@ public abstract class Employee extends User {
         this.password = password;
     }
 
+    // Getters
+
+    public String getPassword() {
+        return password;
+    }
+
 }

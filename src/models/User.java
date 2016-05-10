@@ -8,8 +8,7 @@ import helpers.interfaces.ModelNameable;
 public abstract class User implements ModelNameable {
 
     public enum Sexe {
-        Male,
-        Female;
+        Male, Female;
 
         public String rawValue() {
             switch (this) {
