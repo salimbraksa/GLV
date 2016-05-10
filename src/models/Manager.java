@@ -13,8 +13,7 @@ public class Manager extends Employee {
 
     // Model Nameable Implementation
 
-    @Override
-    public String getModelName() {
+    static public String getModelName() {
         return "manager";
     }
 

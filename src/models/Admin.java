@@ -11,11 +11,4 @@ public class Admin extends Employee {
         super(id, firstName, last_name, sexe, email, phone, password);
     }
 
-    // Model Nameable Implementation
-
-    @Override
-    public String getModelName() {
-        return "admin";
-    }
-
 }
