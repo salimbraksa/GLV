@@ -31,7 +31,8 @@ public class UserStore implements StoreType<User>  {
 
     @Override
     public void delete(int id) {
-
+        String request = "DELETE FROM User WHERE id=" + id;
+        mysql.executeUpdate(request);
     }
 
     @Override
