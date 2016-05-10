@@ -30,12 +30,13 @@ public class CustomerStore implements StoreType<Customer> {
     @Override
     public void create(Customer object) {
 
+        String type = object.getClass().getSimpleName();
         String birthday = DateExtensionKt.getTimestamp(object.getBirthday());
         String request = "INSERT INTO User (first_name, last_name, sexe, email, phone, diligence, cin, birthday, type) " +
                 "VALUES ('"+ object.getFirstName() +"','"+ object.getLastName() +"','"+ object.getSexe().rawValue()
                 +"','"+ object.getEmail() +"','"+ object.getPhone() + "','" +
                 object.getDiligence().rawValue() + "','" + object.getCin() + "','" + birthday + "','"
-                + object.getModelName() + "');";
+                + type + "');";
 
         mysql.executeUpdate(request);
 

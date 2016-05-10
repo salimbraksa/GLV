@@ -62,11 +62,4 @@ public class Customer extends User{
         return diligence;
     }
 
-    // Model Nameable Implementation
-
-    @Override
-    public String getModelName() {
-        return "customer";
-    }
-
 }

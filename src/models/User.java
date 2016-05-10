@@ -1,11 +1,9 @@
 package models;
 
-import helpers.interfaces.ModelNameable;
-
 /**
  * Created by Salim on 4/27/16.
  */
-public abstract class User implements ModelNameable {
+public abstract class User {
 
     public enum Sexe {
         Male, Female;
@@ -65,10 +63,5 @@ public abstract class User implements ModelNameable {
     public Sexe getSexe() {
         return sexe;
     }
-
-    // Model Nameable Implementation
-
-    @Override
-    public abstract String getModelName();
 
 }
