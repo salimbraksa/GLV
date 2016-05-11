@@ -1,6 +1,6 @@
 package services.stores;
 
-import helpers.interfaces.FilterOptionsType;
+import helpers.interfaces.FilterOptionType;
 import helpers.interfaces.Filterable;
 import models.Admin;
 import models.Employee;
@@ -16,7 +16,27 @@ import java.util.ArrayList;
 /**
  * Created by Salim on 5/9/16.
  */
-public class EmployeeStore implements StoreType<Employee> {
+public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> {
+
+    // Enums
+
+    public enum FilterOption implements FilterOptionType {
+
+        // Cases
+        Id("id"), FirstName("first_name"), LastName("last_name");
+
+        // Constructor
+        String option;
+        FilterOption(String value) {
+            System.out.println(value);
+            option = value;
+        }
+
+        @Override
+        public String getRawValue() {
+            return option;
+        }
+    }
 
     // Singleton Implementation
 
@@ -127,6 +147,26 @@ public class EmployeeStore implements StoreType<Employee> {
         }
 
         return listEmployee;
+    }
+
+    // Filterable Interface
+
+    @Override
+    public ArrayList<Employee> filterBy(FilterOptionType option, String value) {
+
+        // Execute Query
+        String query = "SELECT * FROM User WHERE " + option.getRawValue() + "='" + value + "';";
+        ResultSet result = mysql.executeQuery(query);
+
+        // Try Accessing the result
+        try {
+            System.out.println(result.next());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mysql.disconnect();
+        return null;
+
     }
 
 }
