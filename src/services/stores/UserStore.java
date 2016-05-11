@@ -6,10 +6,8 @@ import models.Employee;
 import models.User;
 import services.mysql.Mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.stream.Stream;
+
 
 /**
  * Created by Salim on 5/4/16.
@@ -38,7 +36,7 @@ public class UserStore implements StoreType<User>, Filterable<User> {
 
     @Override
     public void delete(int id) {
-        String request = "DELETE FROM User WHERE id=" + id;
+        String request = "DELETE FROM User WHERE id=" + id+";";
         mysql.executeUpdate(request);
     }
 
@@ -47,30 +45,7 @@ public class UserStore implements StoreType<User>, Filterable<User> {
     }
 
     @Override
-    public User find(int id) {
-        ResultSet result = mysql.executeQuery("SELECT * FROM user WHERE id="+id);
-
-        //Retrieve data by column name
-        try {
-            int userId = result.getInt("id");
-            String userFirstName = result.getString("first_name");
-            String userLastName = result.getString("last_name");
-            String userSexe = result.getString("sexe");
-            String userEmail = result.getString("email");
-            String userPhone = result.getString("phone");
-            String userType = result.getString("type");
-            
-
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        ///User user = new User();
-        return null;
-    }
+    public User find(int id) { return null; }
 
     @Override
     public ArrayList<User> findAll() {
