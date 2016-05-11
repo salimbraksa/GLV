@@ -56,17 +56,19 @@ public class EmployeeStore implements StoreType<Employee> {
     public void update(int id, Employee object) {
 
         String type = object.getClass().getSimpleName();
+
+        //maybe we need to change the type like from manager to admin !!
         ResultSet result = mysql.executeQuery("UPDATE User" +
                 "SET first_name="+object.getFirstName()+", last_name="+object.getLastName()+", sexe="+object.getSexe()
-                +", phone="+object.getPhone()+", email="+object.getEmail()+
-                "WHERE id="+id);
+                +", phone="+object.getPhone()+", email="+object.getEmail()+", type="+type+
+                "WHERE id="+id+";");
 
     }
 
     @Override
     public Employee find(int id) {
 
-        ResultSet result = mysql.executeQuery("SELECT * FROM user WHERE id="+id);
+        ResultSet result = mysql.executeQuery("SELECT * FROM user WHERE id="+id+";");
 
         //Retrieve data from database by column name
 
@@ -104,10 +106,10 @@ public class EmployeeStore implements StoreType<Employee> {
 
     @Override
     public ArrayList<Employee> findAll() {
-        ArrayList<Employee> listEmployee = new ArrayList<Employee>();
+        ArrayList<Employee> listEmployee = new ArrayList<>();
 
         //Get list of Id of admins and managers
-        ResultSet result = mysql.executeQuery("SELECT id FROM User WHERE type='manager' OR type='admin'");
+        ResultSet result = mysql.executeQuery("SELECT id FROM User WHERE type='manager' OR type='admin';");
         try {
             //for each row match
             while (result.next()){

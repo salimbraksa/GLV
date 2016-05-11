@@ -3,10 +3,8 @@ package services.stores;
 import models.User;
 import services.mysql.Mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.stream.Stream;
+
 
 /**
  * Created by Salim on 5/4/16.
@@ -31,7 +29,7 @@ public class UserStore implements StoreType<User>  {
 
     @Override
     public void delete(int id) {
-        String request = "DELETE FROM User WHERE id=" + id;
+        String request = "DELETE FROM User WHERE id=" + id+";";
         mysql.executeUpdate(request);
     }
 
