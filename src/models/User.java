@@ -1,5 +1,7 @@
 package models;
 
+import jdk.internal.dynalink.beans.StaticClass;
+
 /**
  * Created by Salim on 4/27/16.
  */
@@ -15,6 +17,7 @@ public abstract class User {
             }
             return null;
         }
+
 
     }
 

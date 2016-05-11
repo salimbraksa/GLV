@@ -40,30 +40,7 @@ public class UserStore implements StoreType<User>  {
     }
 
     @Override
-    public User find(int id) {
-        ResultSet result = mysql.executeQuery("SELECT * FROM user WHERE id="+id);
-
-        //Retrieve data from database by column name
-        try {
-
-            int userId = result.getInt("id");
-            String userFirstName = result.getString("first_name");
-            String userLastName = result.getString("last_name");
-            String userSexe = result.getString("sexe");
-            String userEmail = result.getString("email");
-            String userPhone = result.getString("phone");
-            String userType = result.getString("type");
-            String userAssiduity = result.getString("assiduity");
-            String userBirthday = result.getString("birthday");
-            String userPassword = result.getString("password");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        return null;
-    }
+    public User find(int id) { return null; }
 
     @Override
     public ArrayList<User> findAll() {
