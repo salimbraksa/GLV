@@ -1,5 +1,7 @@
 package models;
 
+import services.stores.CustomerStore;
+
 import java.util.Date;
 
 /**
@@ -13,10 +15,12 @@ public class Admin extends Employee {
         super(id, firstName, last_name, sexe, email, phone, password);
     }
 
-    private Customer createCustomer(int id, String firstName, String lastName, Sexe sexe, String email,
+    private void createCustomer(int id, String firstName, String lastName, Sexe sexe, String email,
                                     String phone, Customer.Diligence diligence, String cin, Date birthday){
 
-        return new Customer(id, firstName, lastName, sexe, email, phone, diligence, cin, birthday);
+        Customer customer = new Customer(id, firstName, lastName, sexe, email, phone, diligence, cin, birthday);
+
+        CustomerStore.sharedInstance().create(customer);
     }
 
 }

@@ -58,7 +58,7 @@ public class EmployeeStore implements StoreType<Employee> {
         String type = object.getClass().getSimpleName();
 
         //maybe we need to change the type like from manager to admin !!
-        ResultSet result = mysql.executeQuery("UPDATE User" +
+        mysql.executeQuery("UPDATE User" +
                 "SET first_name="+object.getFirstName()+", last_name="+object.getLastName()+", sexe="+object.getSexe()
                 +", phone="+object.getPhone()+", email="+object.getEmail()+", type="+type+
                 "WHERE id="+id+";");

@@ -5,16 +5,30 @@ package models;
  */
 public class Vehicule {
 
+    public enum State {
+        good, bad;
+
+        public String rawValue() {
+            switch (this) {
+                case good:
+                    return "good";
+                case bad:
+                    return "bad";
+               }
+            return null;
+        }
+    }
+
     // Attributes
 
     private int id;
     private String type;
     private double price;
-    private String state;
+    private State state;
 
     // Constructor
 
-    public Vehicule(int id, String type, double price, String state){
+    public Vehicule(int id, String type, double price, State state){
         this.id = id;
         this.type = type;
         this.price = price;
@@ -31,7 +45,7 @@ public class Vehicule {
         return price;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 

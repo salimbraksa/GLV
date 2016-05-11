@@ -57,7 +57,7 @@ public class CustomerStore implements StoreType<Customer> {
     public void update(int id, Customer object) {
 
         String birthday = DateExtensionKt.getTimestamp(object.getBirthday());
-        ResultSet result = mysql.executeQuery("UPDATE User" +
+        mysql.executeQuery("UPDATE User" +
                 "SET first_name="+object.getFirstName()+", last_name="+object.getLastName()+", sexe="+object.getSexe()
                 +", phone="+object.getPhone()+", email="+object.getEmail()+", diligence="+object.getDiligence().rawValue()+
                 ", cin="+object.getCin()+", birthday="+birthday+
