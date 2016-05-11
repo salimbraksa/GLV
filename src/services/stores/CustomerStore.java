@@ -82,7 +82,6 @@ public class CustomerStore implements StoreType<Customer> {
                 User.Sexe customerSexe = User.Sexe.valueOf(result.getString("sexe"));
                 String customerPhone = result.getString("phone");
                 String customerEmail = result.getString("email");
-                String customerPassword = result.getString("password");
                 Customer.Diligence customerDiligence = Customer.Diligence.valueOf(result.getString("diligence"));
                 String customerCin = result.getString("cin");
                 Date customerBirthday = Timestamp.valueOf(result.getString("birthday"));
