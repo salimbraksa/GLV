@@ -13,9 +13,7 @@ public class Mysql {
     }
     private Connection connection;
 
-    public Connection getConnection() {
-        return connection;
-    }
+    Statement currentStatement;
 
     private Mysql() {
 
@@ -44,15 +42,15 @@ public class Mysql {
     // Queries Methods
 
     public ResultSet executeQuery(String query) {
-        Statement stmt = null;
-        ResultSet result = null;
         try {
-            stmt = connection.createStatement();
-            result = stmt.executeQuery(query);
+            connect();
+            currentStatement = connection.createStatement();
+            ResultSet result = currentStatement.executeQuery(query);
+            return result;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result;
+        return null;
     }
 
     public void executeUpdate(String update) {
@@ -66,6 +64,17 @@ public class Mysql {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void disconnect() {
+
+        try {
+            currentStatement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

@@ -68,11 +68,13 @@ public class EmployeeStore implements StoreType<Employee> {
     @Override
     public Employee find(int id) {
 
-        ResultSet result = mysql.executeQuery("SELECT * FROM user WHERE id="+id+";");
+        String query = "Select * From User WHERE id="+id+";";
+        ResultSet result = mysql.executeQuery(query);
 
         //Retrieve data from database by column name
 
         try {
+
             //if there is a valid row match
             if (result.next()){
                 int employeeId = result.getInt("id");
@@ -83,14 +85,13 @@ public class EmployeeStore implements StoreType<Employee> {
                 String employeeEmail = result.getString("email");
                 String employeePassword = result.getString("password");
                 String employeeType = result.getString("type");
-
-              if (employeeType=="manager") {
+              if (employeeType.equals("manager")) {
                   return new Manager(employeeId, employeeFirstName, employeeLastName,
                           employeeSexe, employeePhone, employeeEmail, employeePassword);
               }
-              else if(employeeType=="admin") {
+              else if(employeeType.equals("admin")) {
                   return new Admin(employeeId, employeeFirstName, employeeLastName,
-                          employeeSexe, employeePhone, employeeEmail, employeePassword);
+                          employeeSexe, employeeEmail, employeePhone, employeePassword);
               }
                 else{
                   return null;
@@ -100,7 +101,7 @@ public class EmployeeStore implements StoreType<Employee> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        mysql.disconnect();
         return null;
     }
 
