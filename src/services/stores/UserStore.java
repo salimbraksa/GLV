@@ -1,5 +1,8 @@
 package services.stores;
 
+import helpers.interfaces.FilterOptionsType;
+import helpers.interfaces.Filterable;
+import models.Employee;
 import models.User;
 import services.mysql.Mysql;
 
@@ -11,7 +14,11 @@ import java.util.stream.Stream;
 /**
  * Created by Salim on 5/4/16.
  */
-public class UserStore implements StoreType<User>  {
+public class UserStore implements StoreType<User>, Filterable<User> {
+
+    enum FilterOptions implements FilterOptionsType {
+
+    }
 
     // Singleton Implementation
 
@@ -67,6 +74,13 @@ public class UserStore implements StoreType<User>  {
 
     @Override
     public ArrayList<User> findAll() {
+        return null;
+    }
+
+    // Filtrable Implementations
+
+    @Override
+    public ArrayList<User> filterBy(FilterOptionsType options, String value) {
         return null;
     }
 

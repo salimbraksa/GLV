@@ -1,5 +1,7 @@
 package services.stores;
 
+import helpers.interfaces.FilterOptionsType;
+import helpers.interfaces.Filterable;
 import models.Employee;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import services.mysql.Mysql;

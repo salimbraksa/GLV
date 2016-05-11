@@ -1,10 +1,10 @@
 package services.stores;
 
+import helpers.extensions.DateExtensionKt;
 import models.Customer;
 import services.mysql.Mysql;
 
 import java.util.ArrayList;
-import helpers.extensions.DateExtensionKt;
 
 /**
  * Created by Salim on 5/9/16.
