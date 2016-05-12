@@ -15,6 +15,7 @@ public class Main extends Application {
         primaryStage.show();
         primaryStage.setResizable(false);
         EmployeeStore.sharedInstance().filterBy(EmployeeStore.FilterOption.Id, "1");
+
     }
 
     public static void main(String[] args) {

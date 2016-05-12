@@ -77,7 +77,7 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
 
         String type = object.getClass().getSimpleName();
 
-        //maybe we need to change the type like from manager to admin !!
+        //maybe we can change the type like from manager to admin !!
         mysql.executeQuery("UPDATE User" +
                 "SET first_name="+object.getFirstName()+", last_name="+object.getLastName()+", sexe="+object.getSexe()
                 +", phone="+object.getPhone()+", email="+object.getEmail()+", type="+type+
@@ -105,6 +105,7 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
                 String employeeEmail = result.getString("email");
                 String employeePassword = result.getString("password");
                 String employeeType = result.getString("type");
+
               if (employeeType.equals("manager")) {
                   return new Manager(employeeId, employeeFirstName, employeeLastName,
                           employeeSexe, employeePhone, employeeEmail, employeePassword);
