@@ -93,8 +93,6 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         ResultSet result = mysql.executeQuery(query);
         Employee employee = null;
 
-        //Retrieve data from database by column name
-
         try {
             if (result.next()){
                 employee = new EmployeeFactory(result).getTransformedValue();
@@ -104,6 +102,7 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         }
         mysql.disconnect();
         return employee;
+        
     }
 
     @Override
