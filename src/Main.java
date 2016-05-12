@@ -17,7 +17,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
         primaryStage.setResizable(false);
-        EmployeeStore.sharedInstance().filterBy(EmployeeStore.FilterOption.Id, "1");
+        ArrayList<Employee> employees = EmployeeStore.sharedInstance().findAll();
     }
 
     public static void main(String[] args) {

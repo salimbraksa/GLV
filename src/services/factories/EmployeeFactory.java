@@ -6,6 +6,7 @@ import models.Manager;
 import models.User;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -25,46 +26,36 @@ public class EmployeeFactory {
 
     // Methods
 
-    public Employee getTransformedValue() {
+    public Employee getTransformedValue() throws SQLException {
 
-        try {
+        int id = result.getInt("id");
+        String firstName = result.getString("first_name");
+        String lastName = result.getString("last_name");
+        User.Sexe sex = User.Sexe.valueOf(result.getString("sexe"));
+        String phone = result.getString("phone");
+        String email = result.getString("email");
+        String password = result.getString("password");
+        String type = result.getString("type");
 
-            int id = result.getInt("id");
-            String firstName = result.getString("first_name");
-            String lastName = result.getString("last_name");
-            User.Sexe sex = User.Sexe.valueOf(result.getString("sexe"));
-            String phone = result.getString("phone");
-            String email = result.getString("email");
-            String password = result.getString("password");
-            String type = result.getString("type");
-
-            if (type.equals("admin")) {
-                return new Admin(id, firstName, lastName, sex, email, phone, password);
-            } else if (type.equals("manager")) {
-                return new Manager(id, firstName, lastName, sex, email, phone, password);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (type.equals("admin")) {
+            return new Admin(id, firstName, lastName, sex, email, phone, password);
+        } else if (type.equals("manager")) {
+            return new Manager(id, firstName, lastName, sex, email, phone, password);
         }
+
         return null;
 
     }
 
-    public ArrayList<Employee> getTransformerValues() {
+    public ArrayList<Employee> getTransformerValues() throws SQLException {
 
         ArrayList<Employee> employees = new ArrayList<>();
 
-        try {
-
-            while (result.next()) {
-                Employee employee = getTransformedValue();
-                employees.add(employee);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        while (result.next()) {
+            Employee employee = getTransformedValue();
+            employees.add(employee);
         }
+        
         return employees;
 
     }

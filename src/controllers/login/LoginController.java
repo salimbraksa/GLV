@@ -42,12 +42,12 @@ public class LoginController implements AuthenticationDelegate {
     @Override
     public void authenticationDidFailWithError(Error error) {
 
-        String headerTitle = "Authentication Error";
-        String contentTitle = "";
+        String title = "Authentication Error";
+        String contentTitle = "The email address or password you entered is not valid";
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(null);
-        alert.setHeaderText(headerTitle);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
         alert.setContentText(contentTitle);
         alert.showAndWait();
 
