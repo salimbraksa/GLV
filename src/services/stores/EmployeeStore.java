@@ -7,6 +7,8 @@ import models.Employee;
 import models.Manager;
 import models.User;
 import org.jasypt.util.password.StrongPasswordEncryptor;
+
+import services.factories.EmployeeFactory;
 import services.mysql.Mysql;
 
 import java.sql.ResultSet;
@@ -94,29 +96,8 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         //Retrieve data from database by column name
 
         try {
-
-            //if there is a valid row match
             if (result.next()){
-                int employeeId = result.getInt("id");
-                String employeeFirstName = result.getString("first_name");
-                String employeeLastName = result.getString("last_name");
-                User.Sexe employeeSexe = User.Sexe.valueOf(result.getString("sexe"));
-                String employeePhone = result.getString("phone");
-                String employeeEmail = result.getString("email");
-                String employeePassword = result.getString("password");
-                String employeeType = result.getString("type");
-              if (employeeType.equals("manager")) {
-                  return new Manager(employeeId, employeeFirstName, employeeLastName,
-                          employeeSexe, employeePhone, employeeEmail, employeePassword);
-              }
-              else if(employeeType.equals("admin")) {
-                  return new Admin(employeeId, employeeFirstName, employeeLastName,
-                          employeeSexe, employeeEmail, employeePhone, employeePassword);
-              }
-                else{
-                  return null;
-              }
-
+                return new EmployeeFactory(result).getTransformedValue();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -160,12 +141,12 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
 
         // Try Accessing the result
         try {
-            System.out.println(result.next());
+            return new EmployeeFactory(result).getTransformerValues();
         } catch (Exception e) {
             e.printStackTrace();
         }
         mysql.disconnect();
-        return null;
+        return new ArrayList<Employee>();
 
     }
 

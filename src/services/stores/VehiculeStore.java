@@ -3,7 +3,6 @@ package services.stores;
 import models.Vehicule;
 import services.mysql.Mysql;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**

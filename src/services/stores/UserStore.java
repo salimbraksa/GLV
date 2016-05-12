@@ -1,7 +1,5 @@
 package services.stores;
 
-import helpers.interfaces.FilterOptionType;
-import helpers.interfaces.Filterable;
 import models.User;
 import services.mysql.Mysql;
 
