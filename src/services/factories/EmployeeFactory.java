@@ -53,7 +53,7 @@ public class EmployeeFactory {
 
     public ArrayList<Employee> getTransformerValues() {
 
-        ArrayList<Employee> employees = new ArrayList<Employee>();
+        ArrayList<Employee> employees = new ArrayList<>();
 
         try {
 
