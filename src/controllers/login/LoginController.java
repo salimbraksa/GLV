@@ -3,12 +3,14 @@ package controllers.login;
 import javafx.application.Platform;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.jasypt.util.password.StrongPasswordEncryptor;
+import models.User;
+import services.authentication.Authentication;
+import services.authentication.AuthenticationDelegate;
 
 /**
  * Created by Salim on 4/26/16.
  */
-public class LoginController {
+public class LoginController implements AuthenticationDelegate {
 
     // Views
 
@@ -23,15 +25,19 @@ public class LoginController {
 
     public void signinAction() {
 
-        // Encrypt password
-        StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
-        String encryptedPassword = "PUCyqLD04H7KW4zCBQ92V0mvHa/ZCCYnyqcT6YJ+PKkxwy/DQlTbdGi7k3SmMfuY"; // encryptor.encryptPassword(passwordField.getText());
+        Authentication authenticator = new Authentication();
+        authenticator.delegate = this;
+        authenticator.authenticateWithCredentials(usernameField.getText(), passwordField.getText());
 
-        if (encryptor.checkPassword(passwordField.getText(), encryptedPassword)) {
-            System.out.println("Login succeeds");
-        } else {
-            System.out.println("Failure");
-        }
+    }
+
+    @Override
+    public void authenticationDidSucceedWithUser(User user) {
+        System.out.println(user.getEmail());
+    }
+
+    @Override
+    public void authenticationDidFailWithError(Error error) {
 
     }
 

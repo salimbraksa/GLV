@@ -39,9 +39,9 @@ public class EmployeeFactory {
             String type = result.getString("type");
 
             if (type.equals("admin")) {
-                return new Admin(id, firstName, lastName, sex, phone, email, password);
+                return new Admin(id, firstName, lastName, sex, email, phone, password);
             } else if (type.equals("manager")) {
-                return new Manager(id, firstName, lastName, sex, phone, email, password);
+                return new Manager(id, firstName, lastName, sex, email, phone, password);
             }
 
         } catch (Exception e) {

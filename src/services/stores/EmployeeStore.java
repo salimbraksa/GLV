@@ -25,12 +25,11 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
     public enum FilterOption implements FilterOptionType {
 
         // Cases
-        Id("id"), FirstName("first_name"), LastName("last_name");
+        Id("id"), FirstName("first_name"), LastName("last_name"), Email("email");
 
         // Constructor
         String option;
         FilterOption(String value) {
-            System.out.println(value);
             option = value;
         }
 

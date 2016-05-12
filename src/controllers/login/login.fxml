@@ -44,7 +44,7 @@
                           <children>
                               <VBox spacing="3.0">
                                   <children>
-                                        <Label text="Username">
+                                        <Label text="Email">
                                  <font>
                                     <Font name="Avenir Roman" size="14.0" />
                                  </font>
