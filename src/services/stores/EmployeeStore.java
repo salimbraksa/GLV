@@ -77,9 +77,7 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
     public void update(int id, Employee object) {
 
         String type = object.getClass().getSimpleName();
-
-        //maybe we need to change the type like from manager to admin !!
-        mysql.executeQuery("UPDATE User" +
+        mysql.executeUpdate("UPDATE User" +
                 "SET first_name="+object.getFirstName()+", last_name="+object.getLastName()+", sexe="+object.getSexe()
                 +", phone="+object.getPhone()+", email="+object.getEmail()+", type="+type+
                 "WHERE id="+id+";");
@@ -129,15 +127,16 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         // Execute Query
         String query = "SELECT * FROM User WHERE " + option.getRawValue() + "='" + value + "';";
         ResultSet result = mysql.executeQuery(query);
+        ArrayList<Employee> employees = new ArrayList<>();
 
         // Try Accessing the result
         try {
-            return new EmployeeFactory(result).getTransformerValues();
+            employees = new EmployeeFactory(result).getTransformerValues();
         } catch (Exception e) {
             e.printStackTrace();
         }
         mysql.disconnect();
-        return new ArrayList<Employee>();
+        return employees;
 
     }
 
