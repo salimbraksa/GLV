@@ -46,6 +46,7 @@ public class CustomerStore implements StoreType<Customer> {
 
         mysql.executeUpdate(request);
 
+
     }
 
     @Override
@@ -57,11 +58,12 @@ public class CustomerStore implements StoreType<Customer> {
     public void update(int id, Customer object) {
 
         String birthday = DateExtensionKt.getTimestamp(object.getBirthday());
-        mysql.executeQuery("UPDATE User" +
+        String request = "UPDATE User " +
                 "SET first_name="+object.getFirstName()+", last_name="+object.getLastName()+", sexe="+object.getSexe()
-                +", phone="+object.getPhone()+", email="+object.getEmail()+", diligence="+object.getDiligence().rawValue()+
-                ", cin="+object.getCin()+", birthday="+birthday+
-                "WHERE id="+id+";");
+                    +", phone="+object.getPhone()+", email="+object.getEmail()+", diligence="
+                    +object.getDiligence().rawValue()+", cin="+object.getCin()+", birthday="+birthday+
+                " WHERE id="+id+";";
+        mysql.executeUpdate(request);
 
     }
 
@@ -70,32 +72,33 @@ public class CustomerStore implements StoreType<Customer> {
 
         ResultSet result = mysql.executeQuery("SELECT * FROM user WHERE id="+id+";");
 
+        Customer customer = null;
+
         //Retrieve data from database by column name
 
         try {
 
             //if there is a valid row match
-            if (result.next()){
-                int customerId = result.getInt("id");
-                String customerFistName = result.getString("first_name");
-                String customerLastName = result.getString("last_name");
-                User.Sexe customerSexe = User.Sexe.valueOf(result.getString("sexe"));
-                String customerPhone = result.getString("phone");
-                String customerEmail = result.getString("email");
-                Customer.Diligence customerDiligence = Customer.Diligence.valueOf(result.getString("diligence"));
-                String customerCin = result.getString("cin");
-                Date customerBirthday = Timestamp.valueOf(result.getString("birthday"));
+            if (result.next()) {
 
-                return new Customer(customerId,customerFistName,customerLastName,customerSexe,customerEmail,customerPhone,
-                        customerDiligence,customerCin,customerBirthday);
+                String first_name = result.getString("first_name");
+                String last_name = result.getString("last_name");
+                User.Sexe sexe = User.Sexe.valueOf(result.getString("sexe"));
+                String phone = result.getString("phone");
+                String email = result.getString("email");
+                Customer.Diligence diligence = Customer.Diligence.valueOf(result.getString("diligence"));
+                String cin = result.getString("cin");
+                Date birthday = Timestamp.valueOf(result.getString("birthday"));
 
+                customer = new Customer(id, first_name, last_name, sexe, email, phone, diligence, cin, birthday);
             }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-        return null;
+        mysql.disconnect();
+        return customer;
     }
 
     @Override
@@ -120,9 +123,8 @@ public class CustomerStore implements StoreType<Customer> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        mysql.disconnect();
         return listCustomer;
-
     }
 
 }

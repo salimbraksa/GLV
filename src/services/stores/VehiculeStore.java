@@ -31,24 +31,23 @@ public class VehiculeStore implements StoreType<Vehicule> {
     @Override
     public void create(Vehicule object) {
 
-        String request = "INSERT INTO vehicule (type, price, state) VALUES ('" + object.getType() + "', '" + object.getPrice() +
+        String request = "INSERT INTO vehicule (type, price, state) VALUES ('"+object.getType()+"', '"+object.getPrice()+
                 "', '" + object.getState().rawValue() + "');";
-        mysql.executeQuery(request);
-        mysql.disconnect();
+        mysql.executeUpdate(request);
     }
 
     @Override
     public void delete(int id) {
-        UserStore.sharedInstance().delete(id);
+        String request = "DELETE FROM vehicule WHERE id="+id+";";
+        mysql.executeUpdate(request);
     }
 
     @Override
     public void update(int id, Vehicule object) {
-
-        mysql.executeQuery("UPDATE vehicule" +
-                "SET type=" + object.getType() + ", price=" + object.getPrice() + ", state" + object.getState().rawValue() +
-                "WHERE id=" + id + ";");
-        mysql.disconnect();
+        String query = "UPDATE vehicule " +
+                "SET type="+object.getType()+", price="+object.getPrice()+", state"+object.getState().rawValue()+
+                " WHERE id=" + id + ";";
+        mysql.executeUpdate(query);
 
     }
 
@@ -57,6 +56,7 @@ public class VehiculeStore implements StoreType<Vehicule> {
         String query = "SELECT * FROM vehicule WHERE id=" + id + ";";
         ResultSet result = mysql.executeQuery(query);
 
+        Vehicule vehicule = null;
         //retrieve data by column name
 
         try {
@@ -65,17 +65,16 @@ public class VehiculeStore implements StoreType<Vehicule> {
                 String type = result.getString("type");
                 Double price = result.getDouble("price");
                 Vehicule.State state = Vehicule.State.valueOf(result.getString("state"));
-                mysql.disconnect();
-                //return instance of the vehicule
-                return new Vehicule(id, type, price, state);
+
+                vehicule = new Vehicule(id, type, price, state);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         mysql.disconnect();
-        //if no row match then return null
-        return null;
+        //if no row match then it will return null
+        return vehicule;
     }
 
     @Override
@@ -84,7 +83,7 @@ public class VehiculeStore implements StoreType<Vehicule> {
         ArrayList<Vehicule> listVehicule = new ArrayList<>();
 
         //get list of id of all vehicules
-        ResultSet result = mysql.executeQuery("SELECT id FROM vehicule");
+        ResultSet result = mysql.executeQuery("SELECT id FROM vehicule;");
 
         try {
             //for every row match

@@ -61,8 +61,8 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         StrongPasswordEncryptor strongPasswordEncryptor = new StrongPasswordEncryptor();
         String encryptedPassword = strongPasswordEncryptor.encryptPassword(object.getPassword());
         String request = "INSERT INTO User (first_name, last_name, sexe, email, phone, type, password) " +
-                         "VALUES ('"+ object.getFirstName() +"','"+ object.getLastName() +"','"+ object.getSexe().rawValue()
-                         +"','"+ object.getEmail() +"','"+ object.getPhone() +"','"+ type +"','"+ encryptedPassword +"');";
+                "VALUES ('"+ object.getFirstName() +"','"+ object.getLastName() +"','"+ object.getSexe().rawValue()
+                +"','"+ object.getEmail() +"','"+ object.getPhone() +"','"+ type +"','"+ encryptedPassword +"');";
         mysql.executeUpdate(request);
 
     }
@@ -78,11 +78,10 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         String type = object.getClass().getSimpleName();
 
         //maybe we can change the type like from manager to admin !!
-        mysql.executeQuery("UPDATE User" +
+        mysql.executeUpdate("UPDATE User " +
                 "SET first_name="+object.getFirstName()+", last_name="+object.getLastName()+", sexe="+object.getSexe()
                 +", phone="+object.getPhone()+", email="+object.getEmail()+", type="+type+
-                "WHERE id="+id+";");
-        mysql.disconnect();
+                " WHERE id="+id+";");
 
     }
 
@@ -92,6 +91,7 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         String query = "Select * From User WHERE id="+id+";";
         ResultSet result = mysql.executeQuery(query);
 
+        Employee employee = null;
         //Retrieve data from database by column name
 
         try {
@@ -107,13 +107,10 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
                 String type = result.getString("type");
 
               if (type.equals("manager")) {
-                  return new Manager(id, first_name, last_name, sexe, phone, email, password);
+                  employee = new Manager(id, first_name, last_name, sexe, phone, email, password);
               }
               else if(type.equals("admin")) {
-                  return new Admin(id, first_name, last_name, sexe, phone, email, password);
-              }
-                else{
-                  return null;
+                  employee = new Admin(id, first_name, last_name, sexe, phone, email, password);
               }
 
             }
@@ -121,7 +118,9 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
             e.printStackTrace();
         }
         mysql.disconnect();
-        return null;
+
+        //now we're sure mysql.disconnect is called once at the end
+        return employee;
     }
 
     @Override
