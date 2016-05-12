@@ -82,6 +82,7 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
                 "SET first_name="+object.getFirstName()+", last_name="+object.getLastName()+", sexe="+object.getSexe()
                 +", phone="+object.getPhone()+", email="+object.getEmail()+", type="+type+
                 "WHERE id="+id+";");
+        mysql.disconnect();
 
     }
 
@@ -97,22 +98,19 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
 
             //if there is a valid row match
             if (result.next()){
-                int employeeId = result.getInt("id");
-                String employeeFirstName = result.getString("first_name");
-                String employeeLastName = result.getString("last_name");
-                User.Sexe employeeSexe = User.Sexe.valueOf(result.getString("sexe"));
-                String employeePhone = result.getString("phone");
-                String employeeEmail = result.getString("email");
-                String employeePassword = result.getString("password");
-                String employeeType = result.getString("type");
+                String first_name = result.getString("first_name");
+                String last_name = result.getString("last_name");
+                User.Sexe sexe = User.Sexe.valueOf(result.getString("sexe"));
+                String phone = result.getString("phone");
+                String email = result.getString("email");
+                String password = result.getString("password");
+                String type = result.getString("type");
 
-              if (employeeType.equals("manager")) {
-                  return new Manager(employeeId, employeeFirstName, employeeLastName,
-                          employeeSexe, employeePhone, employeeEmail, employeePassword);
+              if (type.equals("manager")) {
+                  return new Manager(id, first_name, last_name, sexe, phone, email, password);
               }
-              else if(employeeType.equals("admin")) {
-                  return new Admin(employeeId, employeeFirstName, employeeLastName,
-                          employeeSexe, employeeEmail, employeePhone, employeePassword);
+              else if(type.equals("admin")) {
+                  return new Admin(id, first_name, last_name, sexe, phone, email, password);
               }
                 else{
                   return null;
@@ -135,10 +133,10 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         try {
             //for each row match
             while (result.next()){
-                int employeeId = result.getInt("id");
+                int id = result.getInt("id");
 
                 //instance of the admin or manager handled by the methode find
-                Employee employee = find(employeeId);
+                Employee employee = find(id);
 
                 //add the employee to the list
                 listEmployee.add(employee);
@@ -146,7 +144,7 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        mysql.disconnect();
         return listEmployee;
     }
 
