@@ -91,18 +91,19 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
 
         String query = "Select * From User WHERE id="+id+";";
         ResultSet result = mysql.executeQuery(query);
+        Employee employee = null;
 
         //Retrieve data from database by column name
 
         try {
             if (result.next()){
-                return new EmployeeFactory(result).getTransformedValue();
+                employee = new EmployeeFactory(result).getTransformedValue();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         mysql.disconnect();
-        return null;
+        return employee;
     }
 
     @Override

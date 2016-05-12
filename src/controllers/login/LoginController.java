@@ -1,6 +1,7 @@
 package controllers.login;
 
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import models.User;
@@ -31,6 +32,8 @@ public class LoginController implements AuthenticationDelegate {
 
     }
 
+    // Authentication Delegate
+
     @Override
     public void authenticationDidSucceedWithUser(User user) {
         System.out.println(user.getEmail());
@@ -38,6 +41,15 @@ public class LoginController implements AuthenticationDelegate {
 
     @Override
     public void authenticationDidFailWithError(Error error) {
+
+        String headerTitle = "Authentication Error";
+        String contentTitle = "";
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(null);
+        alert.setHeaderText(headerTitle);
+        alert.setContentText(contentTitle);
+        alert.showAndWait();
 
     }
 
