@@ -2,10 +2,7 @@ package services.stores;
 
 import helpers.interfaces.FilterOptionType;
 import helpers.interfaces.Filterable;
-import models.Admin;
 import models.Employee;
-import models.Manager;
-import models.User;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import services.factories.EmployeeFactory;
