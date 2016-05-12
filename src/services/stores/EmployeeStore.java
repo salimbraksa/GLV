@@ -102,31 +102,23 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         }
         mysql.disconnect();
         return employee;
-        
+
     }
 
     @Override
     public ArrayList<Employee> findAll() {
-        ArrayList<Employee> listEmployee = new ArrayList<>();
 
-        //Get list of Id of admins and managers
-        ResultSet result = mysql.executeQuery("SELECT id FROM User WHERE type='manager' OR type='admin';");
+        ArrayList<Employee> employees = new ArrayList<>();
+        ResultSet result = mysql.executeQuery("SELECT * FROM User WHERE type='manager' OR type='admin';");
+
         try {
-            //for each row match
-            while (result.next()){
-                int employeeId = result.getInt("id");
-
-                //instance of the admin or manager handled by the methode find
-                Employee employee = find(employeeId);
-
-                //add the employee to the list
-                listEmployee.add(employee);
-            }
-        } catch (SQLException e) {
+            employees = new EmployeeFactory(result).getTransformerValues();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return listEmployee;
+        mysql.disconnect();
+        return employees;
     }
 
     // Filterable Interface
