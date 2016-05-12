@@ -106,7 +106,11 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
         ArrayList<Employee> employees = new ArrayList<>();
         ResultSet result = mysql.executeQuery("SELECT * FROM User WHERE type='manager' OR type='admin';");
 
-        employees = new EmployeeFactory(result).getTransformerValues();
+        try {
+            employees = new EmployeeFactory(result).getTransformerValues();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         mysql.disconnect();
         return employees;
