@@ -3,6 +3,7 @@ package services.stores;
 import helpers.extensions.DateExtensionKt;
 import models.Customer;
 import models.User;
+import services.factories.CustomerFactory;
 import services.mysql.Mysql;
 
 import java.sql.ResultSet;
@@ -80,20 +81,8 @@ public class CustomerStore implements StoreType<Customer> {
 
             //if there is a valid row match
             if (result.next()) {
-
-                String first_name = result.getString("first_name");
-                String last_name = result.getString("last_name");
-                User.Sexe sexe = User.Sexe.valueOf(result.getString("sexe"));
-                String phone = result.getString("phone");
-                String email = result.getString("email");
-                Customer.Diligence diligence = Customer.Diligence.valueOf(result.getString("diligence"));
-                String cin = result.getString("cin");
-                Date birthday = Timestamp.valueOf(result.getString("birthday"));
-
-                customer = new Customer(id, first_name, last_name, sexe, email, phone, diligence, cin, birthday);
+                customer = new CustomerFactory(result).getTransformedValue();
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -103,28 +92,15 @@ public class CustomerStore implements StoreType<Customer> {
 
     @Override
     public ArrayList<Customer> findAll() {
-
-         ArrayList<Customer> listCustomer = new ArrayList<>();
-
-        //Get list of Id of cutomers
-        ResultSet result = mysql.executeQuery("SELECT id FROM User WHERE type='customer';");
-
+        ArrayList<Customer> customers = new ArrayList<>();
+        ResultSet result = mysql.executeQuery("SELECT * FROM User WHERE type='customer';");
         try {
-            //for each row match
-            while (result.next()){
-                int customerId = result.getInt("id");
-
-                //instance of the customer handled by the methode find
-                Customer customer = find(customerId);
-
-                //add the employee to the list
-                listCustomer.add(customer);
-            }
+             customers = new CustomerFactory(result).getTransformedValues();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         mysql.disconnect();
-        return listCustomer;
+        return customers;
     }
 
 }

@@ -49,7 +49,7 @@ public class EmployeeFactory {
 
     public ArrayList<Employee> getTransformerValues() throws SQLException {
 
-        ArrayList<Employee> employees = new ArrayList<Employee>();
+        ArrayList<Employee> employees = new ArrayList<>();
 
         while (result.next()) {
             Employee employee = getTransformedValue();

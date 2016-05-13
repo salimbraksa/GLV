@@ -108,7 +108,7 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
 
         try {
             employees = new EmployeeFactory(result).getTransformerValues();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
