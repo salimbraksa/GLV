@@ -3,6 +3,7 @@ package services.authentication;
 import models.Employee;
 import models.User;
 import org.jasypt.util.password.StrongPasswordEncryptor;
+import services.filterOptions.UserFilter;
 import services.stores.EmployeeStore;
 import helpers.extensions.ArrayListExtensionKt;
 
@@ -18,7 +19,7 @@ public class Authentication {
 
     public void authenticateWithCredentials(String username, String password) {
 
-        ArrayList<Employee> employees = EmployeeStore.sharedInstance().filterBy(EmployeeStore.FilterOption.Email, username);
+        ArrayList<Employee> employees = EmployeeStore.sharedInstance().filterBy(UserFilter.email, username);
         Employee employee = ArrayListExtensionKt.getFirst(employees);
         if (employee != null) {
 

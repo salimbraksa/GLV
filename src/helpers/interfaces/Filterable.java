@@ -7,6 +7,6 @@ import java.util.ArrayList;
  */
 public interface Filterable<T> {
 
-    public ArrayList<T> filterBy(FilterOptionType option, String value);
+    public ArrayList<T> filterBy(String column, String value);
 
 }
