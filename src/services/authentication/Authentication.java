@@ -1,9 +1,9 @@
 package services.authentication;
 
+import helpers.SBError;
 import models.Employee;
-import models.User;
 import org.jasypt.util.password.StrongPasswordEncryptor;
-import services.filterOptions.UserFilter;
+import helpers.filterOptions.UserFilter;
 import services.stores.EmployeeStore;
 import helpers.extensions.ArrayListExtensionKt;
 
@@ -21,6 +21,8 @@ public class Authentication {
 
         ArrayList<Employee> employees = EmployeeStore.sharedInstance().filterBy(UserFilter.email, username);
         Employee employee = ArrayListExtensionKt.getFirst(employees);
+        SBError error = new SBError("Authentication Error", "The email address or password you entered is not valid");
+
         if (employee != null) {
 
             // Compare Password
@@ -28,11 +30,11 @@ public class Authentication {
             if (encryptor.checkPassword(password, employee.getPassword())) {
                 delegate.authenticationDidSucceedWithUser(employee);
             } else {
-                delegate.authenticationDidFailWithError(new Error());
+                delegate.authenticationDidFailWithError(error);
             }
 
         } else {
-            delegate.authenticationDidFailWithError(new Error());
+            delegate.authenticationDidFailWithError(error);
         }
 
     }

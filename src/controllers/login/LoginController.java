@@ -1,5 +1,6 @@
 package controllers.login;
 
+import helpers.SBError;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -42,13 +43,13 @@ public class LoginController implements AuthenticationDelegate {
     @Override
     public void authenticationDidFailWithError(Error error) {
 
-        String title = "Authentication Error";
-        String contentTitle = "The email address or password you entered is not valid";
+        String title = ((SBError) error).getTitle();
+        String message = error.getMessage();
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(contentTitle);
+        alert.setContentText(message);
         alert.showAndWait();
 
     }

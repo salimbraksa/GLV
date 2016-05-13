@@ -1,4 +1,4 @@
-package services.filterOptions;
+package helpers.filterOptions;
 
 /**
  * Created by Salim on 5/13/16.
