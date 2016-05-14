@@ -1,5 +1,7 @@
 package services.stores;
 
+import models.Vehicule;
+
 import java.util.ArrayList;
 
 /**
@@ -21,5 +23,6 @@ public interface StoreType<T> {
 
     // Fetch all resources
     public ArrayList<T> findAll();
+
 
 }

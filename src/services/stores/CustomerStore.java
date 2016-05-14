@@ -1,9 +1,12 @@
 package services.stores;
 
 import helpers.extensions.DateExtensionKt;
+import helpers.interfaces.Filterable;
 import models.Customer;
 import models.User;
+import models.Vehicule;
 import services.factories.CustomerFactory;
+import services.factories.VehiculeFactory;
 import services.mysql.Mysql;
 
 import java.sql.ResultSet;
@@ -16,7 +19,7 @@ import java.util.Date;
 /**
  * Created by Salim on 5/9/16.
  */
-public class CustomerStore implements StoreType<Customer> {
+public class CustomerStore implements StoreType<Customer>, Filterable<Customer> {
 
     // Singleton Implementation
 
@@ -102,5 +105,21 @@ public class CustomerStore implements StoreType<Customer> {
         mysql.disconnect();
         return customers;
     }
+
+    @Override
+    public ArrayList<Customer> filterBy(String column, String value) {
+        ArrayList<Customer> customers = new ArrayList<>();
+        String query = "SELECT * FROM customer WHERE "+column+"="+value+";";
+        ResultSet result = mysql.executeQuery(query);
+
+        try {
+            customers = new CustomerFactory(result).getTransformedValues();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        mysql.disconnect();
+        return customers;
+    }
+
 
 }

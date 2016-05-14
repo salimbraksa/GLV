@@ -2,6 +2,7 @@ package services.stores;
 
 import helpers.interfaces.Filterable;
 import models.Employee;
+import models.Vehicule;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import services.factories.EmployeeFactory;

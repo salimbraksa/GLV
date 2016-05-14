@@ -1,6 +1,8 @@
 package services.stores;
 
+import helpers.interfaces.Filterable;
 import models.Supplier;
+import services.factories.SupplierFactory;
 import services.mysql.Mysql;
 
 import java.sql.ResultSet;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by chaymaebz on 12/05/16.
  */
-public class SupplierStore implements StoreType<Supplier> {
+public class SupplierStore implements StoreType<Supplier>, Filterable<Supplier> {
 
 
     //singleton implementation
@@ -54,18 +56,11 @@ public class SupplierStore implements StoreType<Supplier> {
     @Override
     public Supplier find(int id) {
         Supplier supplier = null;
-
         ResultSet result = mysql.executeQuery("SELECT * FROM supplier WHERE id="+id+";");
         //retrieve data
         try {
             if (result.next()){
-
-                String name = result.getString("name");
-                String phone = result.getString("phone");
-                String email = result.getString("email");
-                String adress = result.getString("adress");
-
-                supplier = new Supplier(id,name,phone,email,adress);
+                supplier = new SupplierFactory(result).getTransformedValue();
             }
 
         } catch (SQLException e) {
@@ -77,6 +72,29 @@ public class SupplierStore implements StoreType<Supplier> {
 
     @Override
     public ArrayList<Supplier> findAll() {
-        return null;
+        ArrayList<Supplier> suppliers = new ArrayList<>();
+        ResultSet result = mysql.executeQuery("SELECT * FROM supplier");
+
+        try {
+            suppliers = new SupplierFactory(result).getTransformedValues();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        mysql.disconnect();
+        return suppliers;
+    }
+
+    @Override
+    public ArrayList<Supplier> filterBy(String column, String value) {
+        ArrayList<Supplier> suppliers = new ArrayList<>();
+        ResultSet result = mysql.executeQuery("SELECT * FROM supplier WHERE "+column+"="+value+";");
+
+        try {
+            suppliers = new SupplierFactory(result).getTransformedValues();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        mysql.disconnect();
+        return suppliers;
     }
 }

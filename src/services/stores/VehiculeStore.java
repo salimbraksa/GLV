@@ -1,14 +1,19 @@
 package services.stores;
 
+
+import helpers.interfaces.Filterable;
 import models.Vehicule;
+import services.factories.VehiculeFactory;
 import services.mysql.Mysql;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
  * Created by chaymaebz on 11/05/16.
  */
-public class VehiculeStore implements StoreType<Vehicule> {
+public class VehiculeStore implements StoreType<Vehicule>, Filterable<Vehicule> {
 
     //singleton implementation
 
@@ -46,11 +51,50 @@ public class VehiculeStore implements StoreType<Vehicule> {
 
     @Override
     public Vehicule find(int id) {
-        return null;
+
+        String query = "SELECT * FROM vehicule where id="+id+";";
+        ResultSet result = mysql.executeQuery(query);
+        Vehicule vehicule = null;
+        try {
+            if (result.next()){
+                vehicule = new VehiculeFactory(result).getTransformedValue();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        mysql.disconnect();
+        return vehicule;
     }
 
     @Override
     public ArrayList<Vehicule> findAll() {
-        return null;
+        String query = "SELECT * FROM vehicule";
+        ResultSet result = mysql.executeQuery(query);
+        ArrayList<Vehicule> vehicules = new ArrayList<>();
+
+        try {
+            vehicules = new VehiculeFactory(result).getTransformedValues();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        mysql.disconnect();
+        return vehicules;
+    }
+
+
+    @Override
+    public ArrayList<Vehicule> filterBy(String column, String value) {
+        String query = "SELECT * FROM vehicule WHERE "+column+"="+value+";";
+        ResultSet result = mysql.executeQuery(query);
+        ArrayList<Vehicule> vehicules = new ArrayList<>();
+
+        try {
+            vehicules = new VehiculeFactory(result).getTransformedValues();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        mysql.disconnect();
+        return vehicules;
+
     }
 }
