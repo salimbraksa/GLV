@@ -20,7 +20,6 @@ public class LeaseStore implements StoreType<Lease>, Filterable<Lease> {
     static public LeaseStore sharedInstance(){ return singleton; }
 
     private LeaseStore() { }
-    private LeaseStore() { }
 
     Mysql mysql = Mysql.sharedInstance();
 
