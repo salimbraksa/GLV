@@ -65,7 +65,7 @@ public class LeaseStore implements StoreType<Lease>, Filterable<Lease> {
     @Override
     public ArrayList<Lease> findAll() {
         ArrayList<Lease> leases = new ArrayList<>();
-        ResultSet result = mysql.executeQuery("SELECT * FROM lease");
+        ResultSet result = mysql.executeQuery("SELECT * FROM lease;");
         try {
             leases =new LeaseFactory(result).getTansformatedValues();
         } catch (SQLException e) {
