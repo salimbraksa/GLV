@@ -13,8 +13,8 @@ public class Lease extends Order {
 
     // Constructor
 
-    public Lease(double cost, Date date, int id, int supplierId, int vehiculeId, Date endDate){
-        super(cost, date, id, supplierId, vehiculeId);
+    public Lease(int id, double cost, Date date, int supplierId, int vehiculeId, Date endDate){
+        super(id, cost, date, supplierId, vehiculeId);
         this.endDate = endDate;
     }
 

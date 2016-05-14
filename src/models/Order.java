@@ -17,7 +17,8 @@ public class Order {
 
     // Construtor
 
-    public Order(double cost, Date date, int id, int supplierId, int vehiculeId) {
+    public Order(int id,double cost, Date date, int supplierId, int vehiculeId) {
+
         this.cost = cost;
         this.date = date;
         this.id = id;
