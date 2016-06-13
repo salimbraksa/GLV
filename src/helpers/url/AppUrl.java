@@ -8,8 +8,6 @@ public class AppUrl {
     // Attributes
     static String url = System.getProperty("user.dir");
 
-
-
     public static String getUrl(){
         return url;
     }

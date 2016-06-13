@@ -31,17 +31,18 @@ public class VehiculeStore implements StoreType<Vehicule>, Filterable<Vehicule> 
     @Override
     public void create(Vehicule object) {
 
-        String request = "INSERT INTO vehicule (type, price, state) VALUES ('"+object.getType()+"', '"+object.getPrice()+
-                "', '"+object.getState().rawValue()+"');";
+        String request = "INSERT INTO vehicule (type, price, state, image_name) VALUES ('"+object.getType()+"', '"+object.getPrice()+
+                "', '"+object.getState().rawValue()+"', '"+object.getImageName()+"');";
         mysql.executeQuery(request);
     }
 
     @Override
-    public void delete(int id) { UserStore.sharedInstance().delete(id); }
+    public void delete(int id) {
+        mysql.executeUpdate("DELETE FROM vehicule WHERE id="+id+";");
+    }
 
     @Override
     public void update(int id, Vehicule object) {
-
 
         mysql.executeQuery("UPDATE vehicule" +
                 "SET type="+object.getType()+", price="+object.getPrice()+", state"+object.getState().rawValue()+
