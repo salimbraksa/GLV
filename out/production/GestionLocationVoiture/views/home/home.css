@@ -1,0 +1,64 @@
+/*
+	Split Pane
+*/
+
+.split-pane {
+	-fx-padding: 0;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-padding: 0 0 0 0
+}
+
+/* 
+	Menu Item
+*/
+
+.menu {
+	-fx-background-color: #2E3D4A;
+	-fx-padding: 0;
+}
+
+.menu-bottom {
+	-fx-background-color: #7D8A96;
+	-fx-background-radius: 0px 0px 0px 0px;
+	-fx-cursor: hand;
+}
+
+.menu-bottom:hover {
+	-fx-background-color: #657482;
+}
+
+.company-name {
+	-fx-font-family: marguerite;
+	-fx-font-size: 24px;
+}
+
+.menu-list {
+	-fx-background-color: transparent;
+}
+
+/*
+	List View
+*/
+
+.list-view {
+    -fx-padding: 0 0 0 0;
+}
+
+.list-cell {
+	-fx-padding: 0 0 0 0;
+    -fx-background-color: #2B3744;
+}
+
+.list-cell:odd {
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #EB6B60;
+}
+
+.list-cell:empty {
+    -fx-background-color: transparent;
+}

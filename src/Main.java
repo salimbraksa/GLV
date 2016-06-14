@@ -1,3 +1,5 @@
+import controllers.Controller;
+import helpers.ControllerLoader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,9 +14,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("controllers/login/login.fxml"));
+
+        ControllerLoader loader = new ControllerLoader("/views/login/login.fxml");
         primaryStage.setTitle("New World");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(loader.getScene());
         primaryStage.show();
         primaryStage.setResizable(false);
         ArrayList<Employee> employees = EmployeeStore.sharedInstance().findAll();

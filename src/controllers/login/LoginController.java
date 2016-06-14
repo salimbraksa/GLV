@@ -1,6 +1,8 @@
 package controllers.login;
 
+import controllers.Controller;
 import helpers.SBError;
+import helpers.shared.Shared;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -12,7 +14,7 @@ import services.authentication.AuthenticationDelegate;
 /**
  * Created by Salim on 4/26/16.
  */
-public class LoginController implements AuthenticationDelegate {
+public class LoginController extends Controller implements AuthenticationDelegate {
 
     // Views
 
@@ -37,7 +39,7 @@ public class LoginController implements AuthenticationDelegate {
 
     @Override
     public void authenticationDidSucceedWithUser(User user) {
-        System.out.println(user.getEmail());
+        Shared.currentUser = user;
     }
 
     @Override

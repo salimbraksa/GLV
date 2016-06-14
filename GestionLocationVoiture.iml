@@ -10,5 +10,6 @@
     <orderEntry type="library" name="ch.inftec.ju:ju-jasypt:Latest" level="project" />
     <orderEntry type="library" name="org.xerial:sqlite-jdbc:Latest" level="project" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="de.jensd:fontawesomefx:Release" level="project" />
   </component>
 </module>
