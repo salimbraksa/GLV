@@ -25,16 +25,19 @@ public class Vehicule {
     private String type;
     private double price;
     private State state;
-    private String image_name;
 
     // Constructor
 
-    public Vehicule(int id, String type, double price, State state, String image_name){
+    public Vehicule(int id, String type, double price, State state){
         this.id = id;
         this.type = type;
         this.price = price;
         this.state = state;
-        this.image_name = image_name;
+    }
+
+
+    public Vehicule(int id){
+        this.id = id;
     }
 
     // Getters
@@ -55,7 +58,4 @@ public class Vehicule {
         return type;
     }
 
-    public String getImageName() {
-        return image_name;
-    }
 }

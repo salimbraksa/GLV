@@ -30,9 +30,9 @@ public class VehiculeFactory {
             String type = result.getString("type");
             Double price = result.getDouble("price");
             Vehicule.State state = Vehicule.State.valueOf(result.getString("state"));
-            String image_name = result.getString("image_name");
 
-            return new Vehicule(id,type,price,state,image_name);
+
+            return new Vehicule(id,type,price,state);
         }
         else {
             return null;
