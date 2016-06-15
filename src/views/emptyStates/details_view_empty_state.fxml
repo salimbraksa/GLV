@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="27.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@empty_state_img.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER">
+         <children>
+            <Label text="Oops ...">
+               <font>
+                  <Font name="Avenir Roman" size="36.0" />
+               </font>
+            </Label>
+            <Label text="No user is registred yet">
+               <font>
+                  <Font name="Avenir Book" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Button defaultButton="true" mnemonicParsing="false" prefHeight="43.0" prefWidth="117.0" style="-fx-background-color: #2769B0;" text="New" textFill="WHITE" />
+   </children>
+</VBox>

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.home.HomeDetailsController">
    <bottom>
       <BorderPane style="-fx-background-color: EEEEEE;" BorderPane.alignment="CENTER">
          <left>
@@ -77,12 +77,12 @@
                                  <children>
                                     <VBox alignment="CENTER" style="-fx-border-width: 0 1 0 0; -fx-border-color: EBEBEB;">
                                        <children>
-                                          <Label text="30">
+                                          <Label fx:id="leftSummaryValue" text="30">
                                              <font>
                                                 <Font name="Roboto Regular" size="51.0" />
                                              </font>
                                           </Label>
-                                          <Label text="USERS">
+                                          <Label fx:id="leftSummaryName" text="USERS">
                                              <font>
                                                 <Font name="System Font Bold" size="13.0" />
                                              </font>
@@ -91,12 +91,12 @@
                                     </VBox>
                                     <VBox alignment="CENTER" GridPane.columnIndex="1">
                                        <children>
-                                          <Label text="3500">
+                                          <Label fx:id="rightSummaryValue" text="3500">
                                              <font>
                                                 <Font name="Roboto Regular" size="51.0" />
                                              </font>
                                           </Label>
-                                          <Label text="CHIFFRE D'AFFAIRE">
+                                          <Label fx:id="rightSummaryName" text="CHIFFRE D'AFFAIRE">
                                              <font>
                                                 <Font name="System Font Bold" size="13.0" />
                                              </font>

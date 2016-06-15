@@ -10,9 +10,12 @@ public class MenuItemModel {
 
     // Attributes
 
-    private String identifier;
     private FontAwesomeIcon icon;
+
+    private String identifier;
     private String title;
+
+    // Getters
 
     public String getTitle() {
         return title;
