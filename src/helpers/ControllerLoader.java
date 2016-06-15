@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import org.jetbrains.annotations.Nullable;
 import sun.applet.Main;
 
 import java.io.IOException;
@@ -18,24 +19,31 @@ public class ControllerLoader {
     private Scene scene;
     private Controller controller;
 
-    public String getPath() {
+    @Nullable public String getPath() {
         return path;
     }
 
-    public Scene getScene() {
+    @Nullable public Scene getScene() {
         return scene;
     }
 
-    public Controller getController() {
+    @Nullable public Controller getController() {
         return controller;
     }
 
-    public ControllerLoader(String path) throws IOException {
+    public ControllerLoader(String path)  {
         this.path = path;
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-        Parent root = (Parent)loader.load();
-        controller = (Controller) loader.getController();
-        scene = new Scene(root, 600, 400);
+        Parent root = null;
+        try {
+            root = (Parent)loader.load();
+            if ( root != null ) {
+                controller = (Controller) loader.getController();
+                scene = new Scene(root, 600, 400);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

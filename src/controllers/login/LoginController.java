@@ -1,12 +1,15 @@
 package controllers.login;
 
 import controllers.Controller;
+import helpers.ControllerLoader;
 import helpers.SBError;
 import helpers.shared.Shared;
 import javafx.application.Platform;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import models.User;
 import services.authentication.Authentication;
 import services.authentication.AuthenticationDelegate;
@@ -39,7 +42,23 @@ public class LoginController extends Controller implements AuthenticationDelegat
 
     @Override
     public void authenticationDidSucceedWithUser(User user) {
+
+        // Set this user
         Shared.currentUser = user;
+
+        // Open dashboard
+        ControllerLoader loader = new ControllerLoader("/views/home/home.fxml");
+        Stage homeStage = new Stage();
+        Scene homeScene = loader.getScene();
+        homeStage.setTitle("Yo");
+        homeStage.setScene(loader.getScene());
+        homeStage.show();
+
+        // Close current window
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        stage.close();
+
+
     }
 
     @Override

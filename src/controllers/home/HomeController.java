@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Salim on 5/15/16.
  */
-public class HomeController extends Controller {
+public class HomeController extends Controller implements Initializable {
 
     // Views
 
@@ -39,7 +39,6 @@ public class HomeController extends Controller {
 
     }
 
-    @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         listView.setItems(menuItems);
