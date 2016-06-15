@@ -23,4 +23,9 @@ public class Admin extends Employee {
         CustomerStore.sharedInstance().create(customer);
     }
 
+    @Override
+    public Role getRole() {
+        return Role.Admin;
+    }
+
 }

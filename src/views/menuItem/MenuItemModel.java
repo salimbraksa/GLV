@@ -2,6 +2,7 @@ package views.menuItem;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import helpers.AppModels;
 
 /**
  * Created by Salim on 5/15/16.
@@ -12,7 +13,7 @@ public class MenuItemModel {
 
     private FontAwesomeIcon icon;
 
-    private String identifier;
+    private AppModels modelType;
     private String title;
 
     // Getters
@@ -25,14 +26,14 @@ public class MenuItemModel {
         return icon;
     }
 
-    public String getIdentifier() {
-        return identifier;
+    public AppModels getModelType() {
+        return modelType;
     }
 
     // Constructor
 
-    public MenuItemModel(String title, String identifier, FontAwesomeIcon icon) {
-        this.identifier = identifier;
+    public MenuItemModel(String title, AppModels modelType, FontAwesomeIcon icon) {
+        this.modelType = modelType;
         this.title = title;
         this.icon = icon;
     }

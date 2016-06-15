@@ -1,5 +1,7 @@
 package helpers.interfaces;
 
+import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.util.ArrayList;
 
 /**
@@ -12,5 +14,9 @@ public interface DetailsViewDataSource<T> {
     String nameOfSummaryAtIndex(int index);
 
     ArrayList<T> getItems();
+
+    String[] getTableViewColumns();
+
+    PropertyValueFactory getPropertyValueFactoryForColumn(String colName);
 
 }

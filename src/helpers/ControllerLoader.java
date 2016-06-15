@@ -34,12 +34,15 @@ public class ControllerLoader {
     public ControllerLoader(String path)  {
         this.path = path;
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-        Parent root = null;
+        Parent root;
         try {
-            root = (Parent)loader.load();
+            root = loader.load();
             if ( root != null ) {
-                controller = (Controller) loader.getController();
+                controller = loader.getController();
                 scene = new Scene(root, 600, 400);
+                if (controller != null) {
+                    controller.view = scene.getRoot();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

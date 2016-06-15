@@ -11,5 +11,6 @@
     <orderEntry type="library" name="org.xerial:sqlite-jdbc:Latest" level="project" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="de.jensd:fontawesomefx:Release" level="project" />
+    <orderEntry type="library" name="com.googlecode.lambdaj:lambdaj:Latest" level="project" />
   </component>
 </module>

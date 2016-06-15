@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,5 +17,18 @@ import java.util.ResourceBundle;
  */
 public class Controller  {
 
+    // Attributes
+
+    public Parent view;
+
+    // Methods
+
+    public void show(double width, double height) {
+
+        Stage stage = new Stage();
+        stage.setScene(view.getScene());
+        stage.show();
+
+    }
 
 }
