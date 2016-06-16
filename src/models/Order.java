@@ -7,6 +7,10 @@ import java.util.Date;
  */
 public class Order {
 
+    public enum Type {
+        Order, Lease;
+    }
+
     // Attributes
 
     private int id;
@@ -47,4 +51,9 @@ public class Order {
     public int getVehiculeId() {
         return vehiculeId;
     }
+
+    public Type getType() {
+        return Type.Order;
+    }
+
 }

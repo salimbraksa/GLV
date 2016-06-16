@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="436.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.forms.CustomerFormController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="436.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.forms.OrderFormController">
    <bottom>
       <BorderPane style="-fx-background-color: #EEE;" BorderPane.alignment="CENTER">
          <top>
@@ -26,6 +25,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </BorderPane.margin>
                <children>
+                  <Button cancelButton="true" mnemonicParsing="false" text="Cancel" />
                   <Button defaultButton="true" mnemonicParsing="false" text="Done" />
                </children>
             </HBox>
@@ -38,7 +38,7 @@
             <Insets />
          </BorderPane.margin>
          <children>
-            <Label opacity="0.55" text="Show Customer">
+            <Label opacity="0.55" text="Add New Order">
                <font>
                   <Font name="Avenir Roman" size="23.0" />
                </font>
@@ -70,63 +70,46 @@
                            <children>
                               <VBox HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label text="First Name" />
-                                    <TextField fx:id="firstName" disable="true" editable="false" />
+                                    <Label text="Supplier" />
+                                    <ComboBox fx:id="supplierBox" prefWidth="150.0" promptText="Select Supplier" />
                                  </children>
                               </VBox>
                               <VBox HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label text="Last Name" />
-                                    <TextField fx:id="lastName" disable="true" editable="false" />
+                                    <Label text="Vehicle" />
+                                    <ComboBox fx:id="vehicleBox" prefWidth="150.0" promptText="Select Vehicle" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
                         <VBox>
                            <children>
-                              <Label text="Email" />
-                              <TextField fx:id="email" disable="true" editable="false" />
+                              <Label text="Cost" />
+                              <TextField fx:id="cost" />
                            </children>
                         </VBox>
-                        <VBox>
-                           <children>
-                              <Label text="Phone" />
-                              <TextField fx:id="phone" disable="true" editable="false" />
-                           </children>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <Label text="Cin" />
-                              <TextField fx:id="cin" disable="true" editable="false" />
-                           </children>
-                        </VBox>
+                        <VBox />
                         <HBox>
                            <children>
-                              <VBox HBox.hgrow="ALWAYS">
+                              <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label text="Birthday" />
-                                    <DatePicker fx:id="birthday" disable="true" editable="false" />
+                                    <Label text="Start Date" />
+                                    <DatePicker fx:id="startDate" />
                                  </children>
                               </VBox>
-                              <VBox HBox.hgrow="ALWAYS">
+                              <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label text="Gender" />
-                                    <ComboBox fx:id="gender" disable="true" prefWidth="150.0" promptText="Select Gender" />
+                                    <Label text="End Date" />
+                                    <DatePicker fx:id="endDate" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
-                        <VBox>
-                           <children>
-                              <HBox alignment="CENTER_LEFT" spacing="8.0">
-                                 <children>
-                                    <Label text="Diligence" />
-                                    <Circle fx:id="diligenceColor" fill="DODGERBLUE" radius="5.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" />
-                                 </children>
-                              </HBox>
-                              <ComboBox fx:id="diligenceBox" disable="true" prefWidth="150.0" />
-                           </children>
-                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox spacing="8.0">
+                     <children>
+                        <VBox />
                      </children>
                   </VBox>
                </children>

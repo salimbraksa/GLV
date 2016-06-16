@@ -18,10 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import models.Customer;
-import models.Employee;
-import models.Rent;
-import models.Vehicule;
+import models.*;
 import views.menuItem.MenuItemCell;
 import views.menuItem.MenuItemModel;
 
@@ -114,6 +111,8 @@ public class HomeController extends Controller implements Initializable {
                 dataSource = new VehicleDetailsViewDataSource( (ArrayList<Vehicule>) modelType.getStore().findAll()); break;
             case Rent:
                 dataSource = new RentDetailsViewDataSource( (ArrayList<Rent>) modelType.getStore().findAll()); break;
+            case Order:
+                dataSource = new OrderDetailsViewDataSource( (ArrayList<Order>) modelType.getStore().findAll()); break;
         }
 
         detailsViewIsEmpty = dataSource == null || dataSource.getItems().size() == 0;

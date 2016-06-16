@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="436.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.forms.CustomerFormController">
@@ -116,6 +117,17 @@
                               </VBox>
                            </children>
                         </HBox>
+                        <VBox>
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                 <children>
+                                    <Label text="Diligence" />
+                                    <Circle fx:id="diligenceColor" fill="DODGERBLUE" radius="5.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" />
+                                 </children>
+                              </HBox>
+                              <ComboBox fx:id="diligenceBox" prefWidth="150.0" promptText="Select diligence" />
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                   <VBox spacing="8.0">

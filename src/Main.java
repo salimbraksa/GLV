@@ -6,8 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Employee;
+import models.Order;
 import models.Vehicule;
+import services.factories.OrderFactory;
 import services.stores.EmployeeStore;
+import services.stores.OrderStore;
 import services.stores.VehiculeStore;
 
 import java.util.ArrayList;
@@ -22,6 +25,9 @@ public class Main extends Application {
         primaryStage.setScene(loader.getScene());
         primaryStage.show();
         primaryStage.setResizable(false);
+
+        ArrayList<Order> orders = OrderStore.sharedInstance().findAll();
+        System.out.println("Count: " + orders.size());
 
     }
 

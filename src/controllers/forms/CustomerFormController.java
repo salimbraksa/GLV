@@ -6,6 +6,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import models.Customer;
 import models.Employee;
 import models.User;
@@ -29,14 +32,16 @@ public class CustomerFormController extends FormController<Customer> implements 
     @FXML private ComboBox<User.Sexe> gender;
     @FXML private TextField cin;
     @FXML private DatePicker birthday;
+    @FXML private Circle diligenceColor;
+    @FXML private ComboBox<Customer.Diligence> diligenceBox;
 
     // Initializers
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gender.getItems().addAll(User.Sexe.Male, User.Sexe.Female);
+        diligenceBox.getItems().addAll(Customer.Diligence.High, Customer.Diligence.Medium, Customer.Diligence.Low);
     }
-
 
     // Overriding Super Methods
 
@@ -58,6 +63,11 @@ public class CustomerFormController extends FormController<Customer> implements 
         cin.setText(customer.getCin());
         LocalDate date = customer.getBirthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         birthday.setValue(date);
+
+        diligenceBox.setValue(customer.getDiligence());
+
+        String hex = customer.getDiligence().hexColor();
+        diligenceColor.setStyle("-fx-fill: #"+hex+";");
 
     }
 

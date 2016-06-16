@@ -23,5 +23,9 @@ public class Lease extends Order {
     public Date getEndDate() {
         return endDate;
     }
-    
+
+    @Override
+    public Type getType() {
+        return Type.Lease;
+    }
 }

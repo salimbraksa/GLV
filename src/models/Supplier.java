@@ -45,4 +45,8 @@ public class Supplier {
         return phone;
     }
 
+    @Override
+    public String toString() {
+        return id + "-" + getName();
+    }
 }
