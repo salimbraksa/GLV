@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.controlsfx.control.table.TableFilter;
 
 /**
  * Created by Salim on 6/15/16.
@@ -33,6 +34,8 @@ public class HomeDetailsController extends Controller implements FormControllerD
     @FXML private Label rightSummaryName;
 
     @FXML private TableView<Object> tableView;
+
+    private TableFilter filter;
 
     // Methods
 
@@ -62,6 +65,11 @@ public class HomeDetailsController extends Controller implements FormControllerD
             data.add(datum);
         }
         tableView.setItems(data);
+
+        // Set filter
+        if (filter == null) {
+            filter = new TableFilter(tableView);
+        }
 
     }
 
