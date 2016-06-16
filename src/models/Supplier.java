@@ -25,8 +25,7 @@ public class Supplier {
 
     // Getters
 
-
-    public String getAdress() {
+    public String getAddress() {
         return address;
     }
 
@@ -45,4 +44,5 @@ public class Supplier {
     public String getPhone() {
         return phone;
     }
+
 }

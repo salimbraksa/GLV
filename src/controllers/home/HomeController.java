@@ -4,7 +4,9 @@ import controllers.Controller;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import helpers.AppModels;
 import helpers.ControllerLoader;
+import helpers.detailsViewDataSources.CustomerDetailsViewDataSource;
 import helpers.detailsViewDataSources.EmployeeDetailsViewDataSource;
+import helpers.detailsViewDataSources.SupplierDetailsViewDataSource;
 import helpers.interfaces.DetailsViewDataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import models.Customer;
 import models.Employee;
 import views.menuItem.MenuItemCell;
 import views.menuItem.MenuItemModel;
@@ -25,6 +28,7 @@ import views.menuItem.MenuItemModel;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.function.Supplier;
 
 /**
  * Created by Salim on 5/15/16.
@@ -102,6 +106,10 @@ public class HomeController extends Controller implements Initializable {
         switch (modelType) {
             case Employee:
                 dataSource = new EmployeeDetailsViewDataSource( (ArrayList<Employee>) modelType.getStore().findAll()); break;
+            case Customer:
+                dataSource = new CustomerDetailsViewDataSource( (ArrayList<Customer>) modelType.getStore().findAll()); break;
+            case Supplier:
+                dataSource = new SupplierDetailsViewDataSource( (ArrayList<Supplier>) modelType.getStore().findAll()); break;
         }
 
         detailsViewIsEmpty = dataSource == null || dataSource.getItems().size() == 0;

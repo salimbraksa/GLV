@@ -1,9 +1,7 @@
 package helpers;
 
 import controllers.forms.FormController;
-import services.stores.EmployeeStore;
-import services.stores.StoreType;
-import services.stores.VehiculeStore;
+import services.stores.*;
 
 /**
  * Created by Salim on 6/15/16.
@@ -34,6 +32,8 @@ public enum AppModels {
     public StoreType<?> getStore() {
         switch (this) {
             case Employee: return EmployeeStore.sharedInstance();
+            case Customer: return CustomerStore.sharedInstance();
+            case Supplier: return SupplierStore.sharedInstance();
             case Vehicle: return VehiculeStore.sharedInstance();
             default: return null;
         }

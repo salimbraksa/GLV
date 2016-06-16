@@ -24,18 +24,14 @@ public class SupplierFactory {
 
     public Supplier getTransformedValue() throws SQLException {
 
-        if (result.next()) {
+        int id = result.getInt("id");
+        String name = result.getString("name");
+        String phone = result.getString("phone");
+        String email = result.getString("email");
+        String address = result.getString("address");
 
-            int id = result.getInt("id");
-            String name = result.getString("name");
-            String phone = result.getString("phone");
-            String email = result.getString("email");
-            String adress = result.getString("adress");
+        return new Supplier(id, name, phone, email, address);
 
-            return new Supplier(id, name, phone, email, adress);
-        } else {
-            return null;
-        }
     }
 
     public ArrayList<Supplier> getTransformedValues() throws SQLException {

@@ -25,17 +25,15 @@ public class VehiculeFactory {
 
     public Vehicule getTransformedValue() throws SQLException {
 
-        if (result.next()){
-            int id = result.getInt("id");
-            String type = result.getString("type");
-            Double price = result.getDouble("price");
-            Vehicule.State state = Vehicule.State.valueOf(result.getString("state"));
+        int id = result.getInt("id");
+        String type = result.getString("type");
+        double price = result.getDouble("price");
+        int currentStock = result.getInt("currentStock");
+        int totalStock = result.getInt("totalStock");
+        Vehicule.State state = Vehicule.State.valueOf(result.getString("state"));
 
-            return new Vehicule(id,type,price,state);
-        }
-        else {
-            return null;
-        }
+        return new Vehicule(id,type,price,state, currentStock, totalStock);
+
     }
 
      public ArrayList<Vehicule> getTransformedValues() throws SQLException {

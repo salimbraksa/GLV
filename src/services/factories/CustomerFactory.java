@@ -6,6 +6,7 @@ import models.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -41,9 +42,16 @@ public class CustomerFactory {
             String email = result.getString("email");
 
             // Additional information about the customer
+            System.out.println("Diligence: " + result.getString("diligence"));
             Customer.Diligence diligence = Customer.Diligence.valueOf(result.getString("diligence"));
             String cin = result.getString("cin");
-            Date birthday = Timestamp.valueOf(result.getString("birthday"));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            Date birthday = null;
+            try {
+                birthday = format.parse(result.getString("birthday"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             return new Customer(id, first_name, last_name, sexe, email, phone, diligence, cin, birthday);
         }
