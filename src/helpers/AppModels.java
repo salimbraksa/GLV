@@ -34,6 +34,7 @@ public enum AppModels {
             case Employee: return EmployeeStore.sharedInstance();
             case Customer: return CustomerStore.sharedInstance();
             case Supplier: return SupplierStore.sharedInstance();
+            case Rent: return RentStore.sharedInstance();
             case Vehicle: return VehiculeStore.sharedInstance();
             default: return null;
         }

@@ -40,6 +40,11 @@ public class Vehicule {
         this.totalStock = totalStock;
     }
 
+
+    public Vehicule(int id){
+        this.id = id;
+    }
+
     // Getters
     
     public int getId() {
@@ -64,5 +69,10 @@ public class Vehicule {
 
     public String getType() {
         return type;
+    }
+
+    @Override
+    public String toString() {
+        return "" + id + "-" + type;
     }
 }

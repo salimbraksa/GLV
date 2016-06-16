@@ -14,13 +14,13 @@ public class Rent {
     private int customerId;
     private Date startDate;
     private Date endDate;
-    private Location pickupLocation;
-    private Location dropLocation;
+    private String pickupLocation;
+    private String dropLocation;
 
     // Constructor
 
     public Rent(int id, int vehiculeId, int customerId, Date startDate, Date endDate,
-                Location pickupLocation, Location dropLocation){
+                String pickupLocation, String dropLocation){
 
         this.id = id;
         this.customerId = customerId;
@@ -53,7 +53,7 @@ public class Rent {
         return vehiculeId;
     }
 
-    public Location getDropLocation() { return dropLocation; }
+    public String getDropLocation() { return dropLocation; }
 
-    public Location getPickupLocation() { return pickupLocation; }
+    public String getPickupLocation() { return pickupLocation; }
 }

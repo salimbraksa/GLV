@@ -6,7 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Employee;
+import models.Vehicule;
 import services.stores.EmployeeStore;
+import services.stores.VehiculeStore;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ public class Main extends Application {
         primaryStage.setScene(loader.getScene());
         primaryStage.show();
         primaryStage.setResizable(false);
+
     }
 
     public static void main(String[] args) {

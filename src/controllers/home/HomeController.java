@@ -4,9 +4,7 @@ import controllers.Controller;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import helpers.AppModels;
 import helpers.ControllerLoader;
-import helpers.detailsViewDataSources.CustomerDetailsViewDataSource;
-import helpers.detailsViewDataSources.EmployeeDetailsViewDataSource;
-import helpers.detailsViewDataSources.SupplierDetailsViewDataSource;
+import helpers.detailsViewDataSources.*;
 import helpers.interfaces.DetailsViewDataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import models.Customer;
 import models.Employee;
+import models.Rent;
+import models.Vehicule;
 import views.menuItem.MenuItemCell;
 import views.menuItem.MenuItemModel;
 
@@ -110,6 +110,10 @@ public class HomeController extends Controller implements Initializable {
                 dataSource = new CustomerDetailsViewDataSource( (ArrayList<Customer>) modelType.getStore().findAll()); break;
             case Supplier:
                 dataSource = new SupplierDetailsViewDataSource( (ArrayList<Supplier>) modelType.getStore().findAll()); break;
+            case Vehicle:
+                dataSource = new VehicleDetailsViewDataSource( (ArrayList<Vehicule>) modelType.getStore().findAll()); break;
+            case Rent:
+                dataSource = new RentDetailsViewDataSource( (ArrayList<Rent>) modelType.getStore().findAll()); break;
         }
 
         detailsViewIsEmpty = dataSource == null || dataSource.getItems().size() == 0;

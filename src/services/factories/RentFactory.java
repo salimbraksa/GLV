@@ -3,6 +3,7 @@ package services.factories;
 import models.Location;
 import models.Rent;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.ResultSet;
@@ -20,27 +21,29 @@ public class RentFactory {
 
     // Constructor
 
-    public RentFactory(ResultSet result){     this.result = result;  }
+    public RentFactory(ResultSet result){ this.result = result;  }
 
     // Methods
 
     public Rent getTransformedValue() throws SQLException {
-        if (result.next()){
-            int id = result.getInt("id");
-            int vehicule_id = result.getInt("vehicule_id");
-            int customer_id = result.getInt("customer_id");
-            Date start_date = Timestamp.valueOf(result.getString("start_date"));
-            Date end_date = Timestamp.valueOf(result.getString("end_date"));
-            Location pickup_location = new Location(result.getDouble("pickup_location_latitude"),
-                    result.getDouble("pickup_location_longitude"));
-            Location drop_location = new Location(result.getDouble("drop_location_latitude"),
-                    result.getDouble("drop_location_longitude"));
 
-            return new Rent(id,vehicule_id,customer_id,start_date,end_date,pickup_location,drop_location);
+        int id = result.getInt("id");
+        int vehicule_id = result.getInt("vehicule_id");
+        int customer_id = result.getInt("customer_id");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        Date start_date = null;
+        Date end_date = null;
+        try {
+            start_date = format.parse(result.getString("start_date"));
+            end_date = format.parse(result.getString("end_date"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else {
-            return null;
-        }
+        String pickupLocation = result.getString("pickup_location");
+        String dropLocation = result.getString("drop_location");
+
+        return new Rent(id,vehicule_id,customer_id,start_date,end_date,pickupLocation,dropLocation);
+
     }
 
     public ArrayList<Rent> getTransformatedValues() throws SQLException {
@@ -51,4 +54,5 @@ public class RentFactory {
         }
         return rents;
     }
+
 }

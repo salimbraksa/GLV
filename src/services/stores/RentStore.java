@@ -37,11 +37,9 @@ public class RentStore implements StoreType<Rent>, Filterable<Rent>{
     public void create(Rent object) {
         String start_date = DateExtensionKt.getTimestamp(object.getStartDate());
         String end_date = DateExtensionKt.getTimestamp(object.getEndDate());
-        String query = "INSERT INTO rent (vehicule_id,customer_id,start_date,end_date,pickup_location_latitude," +
-                "pickup_location_longitude,drop_location_latitude,drop_location_longitude) VALUES ('"+object.getVehiculeId()
-                +"','"+object.getCustomerId()+"','"+start_date+"','"+end_date+"','"+object.getPickupLocation().getLatitude()
-                +"','"+object.getPickupLocation().getLongitude()+"','"+object.getDropLocation().getLatitude()+"','"
-                +object.getDropLocation()+"');";
+        String query = "INSERT INTO rent (vehicule_id,customer_id,start_date,end_date,pickup_location," + ",drop_location) VALUES ('"+object.getVehiculeId()
+                +"','"+object.getCustomerId()+"','"+start_date+"','"+end_date+"','"+object.getPickupLocation()
+                +"','" +object.getDropLocation()+"');";
         mysql.executeUpdate(query);
     }
 
@@ -54,10 +52,7 @@ public class RentStore implements StoreType<Rent>, Filterable<Rent>{
     public void update(int id, Rent object) {
         String start_date = DateExtensionKt.getTimestamp(object.getStartDate());
         String end_date = DateExtensionKt.getTimestamp(object.getEndDate());
-        String query = "UPDATE rent SET vehicule_id="+object.getVehiculeId()+", customer_id="+object.getCustomerId()+
-                ", start_date="+start_date+", end_date="+end_date+", pickup_location_latitude"+object.getPickupLocation().getLatitude()
-                +", pickup_location_longitude="+object.getPickupLocation().getLongitude()+", drop_location_latitude="
-                +object.getDropLocation().getLatitude()+", drop_location_longitude="+object.getDropLocation().getLongitude()+";";
+        String query = "";
         mysql.executeUpdate(query);
     }
 

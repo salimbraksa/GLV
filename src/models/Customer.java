@@ -62,4 +62,8 @@ public class Customer extends User{
         return diligence;
     }
 
+    @Override
+    public String toString() {
+        return getId() + "-" + getFirstName() + " " + getLastName();
+    }
 }
