@@ -63,6 +63,7 @@ public class OrderFormController extends FormController<Order> implements Initia
 
         vehicleBox.setValue(VehiculeStore.sharedInstance().find(order.getVehiculeId()));
         supplierBox.setValue(SupplierStore.sharedInstance().find(order.getSupplierId()));
+        cost.setText(""+order.getCost());
 
         LocalDate startLocalDate = order.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         startDate.setValue(startLocalDate);

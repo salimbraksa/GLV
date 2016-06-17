@@ -40,7 +40,9 @@ public class CustomerFormController extends FormController<Customer> implements 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gender.getItems().addAll(User.Sexe.Male, User.Sexe.Female);
-        diligenceBox.getItems().addAll(Customer.Diligence.High, Customer.Diligence.Medium, Customer.Diligence.Low);
+        if (diligenceBox != null) {
+            diligenceBox.getItems().addAll(Customer.Diligence.High, Customer.Diligence.Medium, Customer.Diligence.Low);
+        }
     }
 
     // Overriding Super Methods
@@ -64,10 +66,11 @@ public class CustomerFormController extends FormController<Customer> implements 
         LocalDate date = customer.getBirthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         birthday.setValue(date);
 
-        diligenceBox.setValue(customer.getDiligence());
-
-        String hex = customer.getDiligence().hexColor();
-        diligenceColor.setStyle("-fx-fill: #"+hex+";");
+        if (diligenceBox != null) {
+            diligenceBox.setValue(customer.getDiligence());
+            String hex = customer.getDiligence().hexColor();
+            diligenceColor.setStyle("-fx-fill: #" + hex + ";");
+        }
 
     }
 

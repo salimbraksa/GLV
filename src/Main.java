@@ -21,13 +21,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         ControllerLoader loader = new ControllerLoader("/views/login/login.fxml");
-        primaryStage.setTitle("New World");
+        primaryStage.setTitle("Login");
         primaryStage.setScene(loader.getScene());
         primaryStage.show();
         primaryStage.setResizable(false);
-
-        ArrayList<Order> orders = OrderStore.sharedInstance().findAll();
-        System.out.println("Count: " + orders.size());
 
     }
 

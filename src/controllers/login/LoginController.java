@@ -50,7 +50,7 @@ public class LoginController extends Controller implements AuthenticationDelegat
         ControllerLoader loader = new ControllerLoader("/views/home/home.fxml");
         Stage homeStage = new Stage();
         Scene homeScene = loader.getScene();
-        homeStage.setTitle("Yo");
+        homeStage.setTitle("Dashboard");
         homeStage.setScene(loader.getScene());
         homeStage.show();
 

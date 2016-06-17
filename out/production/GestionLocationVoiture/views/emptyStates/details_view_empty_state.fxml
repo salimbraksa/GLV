@@ -21,7 +21,7 @@
                   <Font name="Avenir Roman" size="36.0" />
                </font>
             </Label>
-            <Label text="No user is registred yet">
+            <Label text="No data is available">
                <font>
                   <Font name="Avenir Book" size="30.0" />
                </font>

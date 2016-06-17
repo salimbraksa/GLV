@@ -131,7 +131,7 @@
                                   <TableColumn prefWidth="75.0" text="C2" />
                                 </columns>
                               </TableView>
-                              <Label opacity="0.55" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam" wrapText="true">
+                              <Label opacity="0.55" text="" wrapText="true">
                                  <font>
                                     <Font size="12.0" />
                                  </font>

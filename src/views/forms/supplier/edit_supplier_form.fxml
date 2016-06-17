@@ -36,7 +36,7 @@
             <Insets />
          </BorderPane.margin>
          <children>
-            <Label opacity="0.55" text="Add New Supplier">
+            <Label opacity="0.55" text="Edit Supplier">
                <font>
                   <Font name="Avenir Roman" size="23.0" />
                </font>

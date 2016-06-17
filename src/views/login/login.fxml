@@ -79,7 +79,7 @@
                   <Insets bottom="-3.0" />
                </VBox.margin>
             </Label>
-            <Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, labore et dolore magna aliqua." textFill="#757575">
+            <Label text="Enter your credentials to sign in" textFill="#757575">
                <font>
                   <Font name="Helvetica Neue" size="13.0" />
                </font>
