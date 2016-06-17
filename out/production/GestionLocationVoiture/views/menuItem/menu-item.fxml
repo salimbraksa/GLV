@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="154.0" spacing="11.0" style="-fx-background-color: transparent;" type="HBox" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <FontAwesomeIconView fx:id="iconView" fill="WHITE" glyphName="USER" size="15">
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </FontAwesomeIconView>
+        <Label fx:id="title" text="Users" textFill="WHITE">
+            <font>
+                <Font name="Roboto Regular" size="13.0" />
+            </font>
+        </Label>
+    </children>
+    <padding>
+        <Insets left="19.0" />
+    </padding>
+</fx:root>

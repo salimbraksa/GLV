@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<SplitPane fx:id="scene" dividerPositions="0.28" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@home.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.home.HomeController">
+  <items>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="menu">
+         <top>
+            <BorderPane prefHeight="66.0" prefWidth="179.0" BorderPane.alignment="CENTER">
+               <center>
+                  <Label styleClass="company-name" text="Uber" textFill="WHITE" BorderPane.alignment="CENTER" />
+               </center>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" />
+               </BorderPane.margin>
+            </BorderPane>
+         </top>
+         <center>
+            <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" styleClass="menu-list" BorderPane.alignment="CENTER" />
+         </center>
+         <bottom>
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#signOut" prefHeight="48.0" prefWidth="168.0" styleClass="menu-bottom" BorderPane.alignment="CENTER">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" size="20" />
+               </graphic>
+            </Button>
+         </bottom>
+      </BorderPane>
+    <AnchorPane fx:id="detailPane" minHeight="0.0" minWidth="0.0" prefHeight="472.0" prefWidth="488.0" />
+  </items>
+</SplitPane>

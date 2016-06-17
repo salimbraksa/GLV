@@ -11,5 +11,10 @@ public class Manager extends Employee {
         super(id, firstName, last_name, sexe, email, phone, password);
     }
 
+    // Methods
 
+    @Override
+    public Role getRole() {
+        return Role.Manager;
+    }
 }

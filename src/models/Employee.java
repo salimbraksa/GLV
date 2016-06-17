@@ -5,6 +5,17 @@ package models;
  */
 public abstract class Employee extends User {
 
+    public enum Role {
+        Admin, Manager;
+        public String rawValue() {
+            switch (this) {
+                case Admin: return "admin";
+                case Manager: return "manager";
+                default: return null;
+            }
+        }
+    }
+
     // Attributes
 
     private String password;
@@ -21,5 +32,7 @@ public abstract class Employee extends User {
     public String getPassword() {
         return password;
     }
+
+    abstract public Role getRole();
 
 }
