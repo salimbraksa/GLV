@@ -31,8 +31,5 @@ public class Admin extends Employee {
         return Role.Admin;
     }
 
-    @Override
-    public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
-        return null;
-    }
+
 }
