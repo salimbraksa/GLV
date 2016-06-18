@@ -1,11 +1,17 @@
 package models;
 
+import services.validation.Validatable;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by chaymaebz on 29/04/16.
  */
-public class Order {
+public class Order implements Validatable {
+
+
 
     public enum Type {
         Order, Lease;
@@ -54,6 +60,11 @@ public class Order {
 
     public Type getType() {
         return Type.Order;
+    }
+
+    @Override
+    public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
+        return null;
     }
 
 }

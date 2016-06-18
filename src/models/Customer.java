@@ -1,11 +1,17 @@
 package models;
 
+import services.validation.Validatable;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by chaymaebz on 28/04/16.
  */
 public class Customer extends User{
+
+
 
     public enum Diligence {
 
@@ -65,5 +71,10 @@ public class Customer extends User{
     @Override
     public String toString() {
         return getId() + "-" + getFirstName() + " " + getLastName();
+    }
+
+    @Override
+    public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
+        return null;
     }
 }

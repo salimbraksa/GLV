@@ -1,9 +1,14 @@
 package models;
 
+import services.validation.Validatable;
+
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * Created by chaymaebz on 29/04/16.
  */
-public class Supplier {
+public class Supplier implements Validatable{
 
     // Attributes
 
@@ -48,5 +53,10 @@ public class Supplier {
     @Override
     public String toString() {
         return id + "-" + getName();
+    }
+
+    @Override
+    public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
+        return null;
     }
 }

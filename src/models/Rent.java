@@ -1,11 +1,15 @@
 package models;
 
+import services.validation.Validatable;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by chaymaebz on 29/04/16.
  */
-public class Rent {
+public class Rent implements Validatable{
 
     // Attributes
 
@@ -56,4 +60,9 @@ public class Rent {
     public String getDropLocation() { return dropLocation; }
 
     public String getPickupLocation() { return pickupLocation; }
+
+    @Override
+    public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
+        return null;
+    }
 }

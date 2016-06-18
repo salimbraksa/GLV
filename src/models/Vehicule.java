@@ -1,9 +1,16 @@
 package models;
 
+import services.validation.Validatable;
+
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * Created by chaymaebz on 29/04/16.
  */
-public class Vehicule {
+public class Vehicule implements Validatable{
+
+
 
     public enum State {
         Good, Bad;
@@ -74,5 +81,10 @@ public class Vehicule {
     @Override
     public String toString() {
         return "" + id + "-" + type;
+    }
+
+    @Override
+    public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
+        return null;
     }
 }

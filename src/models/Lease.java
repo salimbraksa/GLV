@@ -1,6 +1,10 @@
 package models;
 
+import services.validation.Validatable;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by chaymaebz on 29/04/16.
@@ -27,5 +31,10 @@ public class Lease extends Order {
     @Override
     public Type getType() {
         return Type.Lease;
+    }
+
+    @Override
+    public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
+        return null;
     }
 }

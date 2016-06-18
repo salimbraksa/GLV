@@ -1,9 +1,11 @@
 package models;
 
+import services.validation.Validatable;
+
 /**
  * Created by Salim on 5/9/16.
  */
-public abstract class Employee extends User {
+public abstract class Employee extends User{
 
     public enum Role {
         Admin, Manager;
