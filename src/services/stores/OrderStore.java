@@ -50,7 +50,7 @@ public class OrderStore implements StoreType<Order> {
 
     @Override
     public void update(int id, Order object) {
-        
+
         String type = object.getClass().getSimpleName();
 
         if (type=="Order"){
