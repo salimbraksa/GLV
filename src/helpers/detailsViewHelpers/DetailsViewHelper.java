@@ -1,5 +1,6 @@
 package helpers.detailsViewHelpers;
 
+import controllers.forms.FormController;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -12,5 +13,11 @@ public abstract class DetailsViewHelper {
 
     /// Returns Property Value Factory from column name
     public abstract PropertyValueFactory getPropertyValueFactoryFromColumnName(String columnName);
+
+    /// Deletes object from the database
+    public abstract void delete(Object object);
+
+    /// Returns the form associated with the model
+    public abstract FormController<?> formControllerForOperation(FormController.FormType operation);
 
 }

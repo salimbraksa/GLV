@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="27.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="27.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.home.EmptyStateController">
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -28,6 +28,6 @@
             </Label>
          </children>
       </VBox>
-      <Button defaultButton="true" mnemonicParsing="false" prefHeight="43.0" prefWidth="117.0" style="-fx-background-color: #2769B0;" text="New" textFill="WHITE" />
+      <Button defaultButton="true" mnemonicParsing="false" onAction="#newItem" prefHeight="43.0" prefWidth="117.0" style="-fx-background-color: #2769B0;" text="New" textFill="WHITE" />
    </children>
 </VBox>

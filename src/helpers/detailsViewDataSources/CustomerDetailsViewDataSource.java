@@ -4,6 +4,7 @@ import helpers.interfaces.DetailsViewDataSource;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Customer;
 import models.User;
+import services.stores.CustomerStore;
 
 import java.util.ArrayList;
 
@@ -26,8 +27,8 @@ public class CustomerDetailsViewDataSource implements DetailsViewDataSource<Cust
 
     // Constructors
 
-    public CustomerDetailsViewDataSource(ArrayList<Customer> items) {
-        this.items = items;
+    public CustomerDetailsViewDataSource() {
+        reloadItems();
     }
 
     // Interface Methods
@@ -54,27 +55,7 @@ public class CustomerDetailsViewDataSource implements DetailsViewDataSource<Cust
 
     @Override
     public void reloadItems() {
-
-    }
-
-    public String[] getTableViewColumns() {
-        String[] array = {"id", "first name", "last name", "sexe", "email", "phone", "diligence", "cin", "birthday"};
-        return array;
-    }
-
-    public PropertyValueFactory getPropertyValueFactoryForColumn(String colName) {
-        switch (colName) {
-            case "id": return new PropertyValueFactory<Customer, String>("id");
-            case "first name": return new PropertyValueFactory<Customer, String>("firstName");
-            case "last name": return new PropertyValueFactory<Customer, String>("lastName");
-            case "sexe": return new PropertyValueFactory<Customer, String>("sexe");
-            case "email": return new PropertyValueFactory<Customer, String>("email");
-            case "phone": return new PropertyValueFactory<Customer, String>("phone");
-            case "diligence": return new PropertyValueFactory<Customer, String>("diligence");
-            case "cin": return new PropertyValueFactory<Customer, String>("cin");
-            case "birthday": return new PropertyValueFactory<Customer, String>("birthday");
-            default: return null;
-        }
+        items = CustomerStore.sharedInstance().findAll();
     }
 
 }

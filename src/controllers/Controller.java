@@ -21,6 +21,7 @@ public class Controller  {
 
     public Parent view;
     public Stage window;
+    public Controller parentController;
 
     // Methods
 

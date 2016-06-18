@@ -1,9 +1,11 @@
 package controllers.home;
 
 import controllers.Controller;
+import controllers.forms.FormControllerDelegate;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import helpers.AppModels;
 import helpers.ControllerLoader;
+import helpers.detailsViewHelpers.CustomerDetailsViewHelper;
 import helpers.detailsViewHelpers.DetailsViewHelper;
 import helpers.detailsViewHelpers.EmployeeDetailsViewHelper;
 import helpers.detailsViewDataSources.*;
@@ -32,7 +34,7 @@ import java.util.function.Supplier;
 /**
  * Created by Salim on 5/15/16.
  */
-public class HomeController extends Controller implements Initializable {
+public class HomeController extends Controller implements Initializable, FormControllerDelegate {
 
     // Attributes
 
@@ -104,16 +106,19 @@ public class HomeController extends Controller implements Initializable {
         // Get all items of selected resource
         AppModels modelType = cell.getItem().getModelType();
         DetailsViewDataSource<?> dataSource = null;
-        DetailsViewHelper viewBuilder = null;
+        DetailsViewHelper modelHelper = null;
 
         switch (modelType) {
             case Employee:
                 dataSource = new EmployeeDetailsViewDataSource();
-                viewBuilder = new EmployeeDetailsViewHelper();
+                modelHelper = new EmployeeDetailsViewHelper();
                 break;
 
             case Customer:
-                dataSource = new CustomerDetailsViewDataSource( (ArrayList<Customer>) modelType.getStore().findAll()); break;
+                dataSource = new CustomerDetailsViewDataSource();
+                modelHelper = new CustomerDetailsViewHelper();
+                break;
+
             case Supplier:
                 dataSource = new SupplierDetailsViewDataSource( (ArrayList<Supplier>) modelType.getStore().findAll()); break;
             case Vehicle:
@@ -126,18 +131,28 @@ public class HomeController extends Controller implements Initializable {
 
         detailsViewIsEmpty = dataSource == null || dataSource.getItems().size() == 0;
         if (detailsViewIsEmpty) {
-            setEmptyStateView();
+            setEmptyStateView(modelHelper);
             return;
         }
-        setDetailView(dataSource, viewBuilder, modelType);
+        setDetailView(dataSource, modelHelper, modelType);
+
+    }
+
+    // FormControllerDelegate interface methods
+
+    @Override
+    public void didUpdateDatabase() {
 
     }
 
     // Helpers
 
-    private void setEmptyStateView() {
+    private void setEmptyStateView(DetailsViewHelper modelHelper) {
 
         ControllerLoader loader = new ControllerLoader("/views/emptyStates/details_view_empty_state.fxml");
+        EmptyStateController controller = (EmptyStateController) loader.getController();
+        controller.parentController = this;
+        controller.modelHelper = modelHelper;
         Parent emptyStateView = loader.getScene().getRoot();
         configureDetailView(emptyStateView);
         detailPane.getChildren().setAll(emptyStateView);

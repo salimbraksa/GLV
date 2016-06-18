@@ -13,18 +13,18 @@ public class Customer extends User{
 
         public String rawValue() {
             switch (this) {
-                case High: return "high";
-                case Medium: return "medium";
-                case Low: return "low";
+                case High: return "High";
+                case Medium: return "Medium";
+                case Low: return "Low";
             }
             return null;
         }
 
         public String hexColor() {
             switch (this) {
-                case High: return "00C853";
+                case High: return "F44336";
                 case Medium: return "FF7F00";
-                case Low: return "F44336";
+                case Low: return "00C853";
             }
             return null;
         }

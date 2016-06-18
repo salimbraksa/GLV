@@ -47,9 +47,7 @@ public class CustomerStore implements StoreType<Customer>, Filterable<Customer> 
                 +"','"+ object.getEmail() +"','"+ object.getPhone() + "','" +
                 object.getDiligence().rawValue() + "','" + object.getCin() + "','" + birthday + "','"
                 + type + "');";
-
         mysql.executeUpdate(request);
-
 
     }
 
@@ -96,7 +94,7 @@ public class CustomerStore implements StoreType<Customer>, Filterable<Customer> 
     @Override
     public ArrayList<Customer> findAll() {
         ArrayList<Customer> customers = new ArrayList<>();
-        ResultSet result = mysql.executeQuery("SELECT * FROM User WHERE type='customer';");
+        ResultSet result = mysql.executeQuery("SELECT * FROM User WHERE type='Customer';");
         try {
              customers = new CustomerFactory(result).getTransformedValues();
         } catch (SQLException e) {

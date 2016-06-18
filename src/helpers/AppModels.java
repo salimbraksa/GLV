@@ -43,7 +43,6 @@ public enum AppModels {
 
     public FormController<?> getFormController(FormController.FormType type) {
         String fxmlName = type.rawValue() + "_" + rawValue() + "_form.fxml";
-        System.out.println("URL: " + fxmlName);
         ControllerLoader loader = new ControllerLoader("/views/forms/"+rawValue()+"/"+fxmlName);
         FormController<?> controller = (FormController<?>) loader.getController();
         return controller;

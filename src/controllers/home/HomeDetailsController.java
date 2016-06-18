@@ -10,17 +10,17 @@ import helpers.detailsViewHelpers.EmployeeDetailsViewHelper;
 import helpers.interfaces.DetailsViewDataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import models.Employee;
 import org.controlsfx.control.table.TableFilter;
 import services.stores.EmployeeStore;
 
+import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -42,16 +42,20 @@ public class HomeDetailsController extends Controller implements FormControllerD
     @FXML private Label leftSummaryName;
     @FXML private Label rightSummaryValue;
     @FXML private Label rightSummaryName;
+    @FXML private TextField filterField;
 
     @FXML private TableView<Object> tableView;
 
     private TableFilter filter;
 
-    // Initializer
+    // Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // Set up data
+        data = FXCollections.observableArrayList();
+        tableView.setItems(data);
     }
 
 
@@ -76,15 +80,13 @@ public class HomeDetailsController extends Controller implements FormControllerD
             tableView.getColumns().add(column);
         }
 
-        //
-        if (filter == null) {
+        // Initialize filter
+        if (filter == null ) {
             filter = new TableFilter(tableView);
-            data = filter.getBackingList();
-            tableView.setItems(data);
         }
 
         // Update data
-        data.clear();
+        filter.getBackingList().clear();
         for (Object datum : dataSource.getItems()) {
             data.add(datum);
         }
@@ -153,8 +155,7 @@ public class HomeDetailsController extends Controller implements FormControllerD
 
         // Get the item
         Object selectedItem = tableView.getSelectionModel().getSelectedItem();
-        Employee employee = ((EmployeeDetailsViewHelper) modelHelper).castedItem(selectedItem);
-        EmployeeStore.sharedInstance().delete(employee.getId());
+        modelHelper.delete(selectedItem);
         dataSource.reloadItems();
         reloadData();
 

@@ -11,7 +11,7 @@ import java.util.*
 fun Date.getTimestamp(): String {
 
     val sq = Timestamp(this.time)
-    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
     return formatter.format(sq)
 
 }
