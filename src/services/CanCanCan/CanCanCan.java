@@ -30,4 +30,16 @@ public class CanCanCan {
     public void can(String ability){
         abilities.add(ability);
     }
-}
+
+    public boolean hasAbility(String ability) {
+        
+        if (abilities.contains(ability)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    }
+
