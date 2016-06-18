@@ -5,12 +5,13 @@ import controllers.forms.FormController;
 import controllers.forms.FormControllerDelegate;
 import helpers.AppModels;
 import helpers.SBError;
-import helpers.detailsViewBuilders.DetailsViewBuilder;
-import helpers.detailsViewBuilders.EmployeeDetailsViewBuilder;
+import helpers.detailsViewHelpers.DetailsViewHelper;
+import helpers.detailsViewHelpers.EmployeeDetailsViewHelper;
 import helpers.interfaces.DetailsViewDataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -19,15 +20,18 @@ import models.Employee;
 import org.controlsfx.control.table.TableFilter;
 import services.stores.EmployeeStore;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Created by Salim on 6/15/16.
  */
-public class HomeDetailsController extends Controller implements FormControllerDelegate {
+public class HomeDetailsController extends Controller implements FormControllerDelegate, Initializable {
 
     // Attributes
 
     public DetailsViewDataSource<?> dataSource;
-    public DetailsViewBuilder viewBuilder;
+    public DetailsViewHelper modelHelper;
 
     public AppModels associatedModel;
     private ObservableList<Object> data;
@@ -42,6 +46,14 @@ public class HomeDetailsController extends Controller implements FormControllerD
     @FXML private TableView<Object> tableView;
 
     private TableFilter filter;
+
+    // Initializer
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
 
     // Methods
 
@@ -58,26 +70,23 @@ public class HomeDetailsController extends Controller implements FormControllerD
 
         // Add Table View Columns
         tableView.getColumns().clear();
-        for (String colName : viewBuilder.getTableColumnNames()) {
+        for (String colName : modelHelper.getTableColumnNames()) {
             TableColumn column = new TableColumn(colName);
-            column.setCellValueFactory(viewBuilder.getPropertyValueFactoryFromColumnName(colName));
+            column.setCellValueFactory(modelHelper.getPropertyValueFactoryFromColumnName(colName));
             tableView.getColumns().add(column);
         }
 
-        // Update data
-        if (data != null) {
-            data.clear();
-        } else {
-            data = FXCollections.observableArrayList();
-        }
-        for (Object datum : dataSource.getItems()) {
-            data.add(datum);
-        }
-        tableView.setItems(data);
-
-        // Set filter
+        //
         if (filter == null) {
             filter = new TableFilter(tableView);
+            data = filter.getBackingList();
+            tableView.setItems(data);
+        }
+
+        // Update data
+        data.clear();
+        for (Object datum : dataSource.getItems()) {
+            data.add(datum);
         }
 
     }
@@ -144,7 +153,7 @@ public class HomeDetailsController extends Controller implements FormControllerD
 
         // Get the item
         Object selectedItem = tableView.getSelectionModel().getSelectedItem();
-        Employee employee = ((EmployeeDetailsViewBuilder) viewBuilder).castedItem(selectedItem);
+        Employee employee = ((EmployeeDetailsViewHelper) modelHelper).castedItem(selectedItem);
         EmployeeStore.sharedInstance().delete(employee.getId());
         dataSource.reloadItems();
         reloadData();

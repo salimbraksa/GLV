@@ -1,4 +1,4 @@
-package helpers.detailsViewBuilders;
+package helpers.detailsViewHelpers;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Employee;
@@ -6,7 +6,7 @@ import models.Employee;
 /**
  * Created by Salim on 6/18/16.
  */
-public class EmployeeDetailsViewBuilder implements DetailsViewBuilder {
+public class EmployeeDetailsViewHelper extends DetailsViewHelper {
 
     @Override
     public String[] getTableColumnNames() {
