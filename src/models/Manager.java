@@ -23,8 +23,5 @@ public class Manager extends Employee {
         return Role.Manager;
     }
 
-    @Override
-    public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
-        return null;
-    }
+
 }

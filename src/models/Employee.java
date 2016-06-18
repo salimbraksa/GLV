@@ -1,6 +1,10 @@
 package models;
 
-import services.validation.Validatable;
+
+import helpers.SBError;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by Salim on 5/9/16.
@@ -36,5 +40,49 @@ public abstract class Employee extends User{
     }
 
     abstract public Role getRole();
+
+    @Override
+    public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
+        ArrayList<Error> listErrors = new ArrayList<>();
+        if (this.getFirstName() == null){
+            SBError error = new SBError("Empty Field","The attribute 'first name' is required");
+            listErrors.add(error);
+        }
+        if (this.getLastName() == null){
+            SBError error = new SBError("Empty Field","The attribute 'last name' is required");
+            listErrors.add(error);
+        }
+        if (this.getPhone() == null){
+            SBError error = new SBError("Empty Field","The attribute 'phone' is required");
+            listErrors.add(error);
+        }
+        if (this.getEmail() == null){
+            SBError error = new SBError("Empty Field","The attribute 'email' is required");
+            listErrors.add(error);
+        }
+        if (this.getSexe() == null){
+            SBError error = new SBError("Empty Field","The attribute 'sexe' is required");
+            listErrors.add(error);
+        }
+        if (this.getRole() == null){
+            SBError error = new SBError("Empty Field","The attribute 'role' is required");
+            listErrors.add(error);
+        }
+        if (this.getPassword() == null){
+            SBError error = new SBError("Empty Field","The attribute 'password' is required");
+            listErrors.add(error);
+        }
+        else {
+            String confirmationPassword = "confirmationPassword";
+            if (additionalInfos.containsKey(confirmationPassword)){
+                if (additionalInfos.get(confirmationPassword)!=this.getPassword()){
+                    SBError error = new SBError("invalid Password","The two passwords don't match");
+                    listErrors.add(error);
+                }
+            }
+        }
+
+        return listErrors;
+    }
 
 }
