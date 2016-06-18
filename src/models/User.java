@@ -1,11 +1,12 @@
 package models;
 
 import jdk.internal.dynalink.beans.StaticClass;
+import services.validation.Validatable;
 
 /**
  * Created by Salim on 4/27/16.
  */
-public abstract class User {
+public abstract class User implements Validatable{
 
     public enum Sexe {
         Male, Female;

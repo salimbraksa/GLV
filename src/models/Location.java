@@ -1,9 +1,14 @@
 package models;
 
+import services.validation.Validatable;
+
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * Created by chaymaebz on 29/04/16.
  */
-public class Location {
+public class Location implements Validatable{
 
     // Attributes
 
@@ -25,5 +30,10 @@ public class Location {
 
     public double getLongitude() {
         return longitude;
+    }
+
+    @Override
+    public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
+        return null;
     }
 }
