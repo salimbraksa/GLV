@@ -32,7 +32,7 @@ public class SupplierStore implements StoreType<Supplier>, Filterable<Supplier> 
 
     @Override
     public void create(Supplier object) {
-        String query = "INSERT INTO supplier (name,phone,email,adress) VALUES ('" + object.getName() + "','" +
+        String query = "INSERT INTO supplier (name,phone,email,address) VALUES ('" + object.getName() + "','" +
                 object.getPhone() + "','" + object.getEmail() + "','" + object.getAddress() + "');";
         mysql.executeUpdate(query);
     }
@@ -46,9 +46,9 @@ public class SupplierStore implements StoreType<Supplier>, Filterable<Supplier> 
     @Override
     public void update(int id, Supplier object) {
         String query = "UPDATE supplier "+
-                "SET name="+object.getName()+", phone="+object.getPhone()+", email="+object.getEmail()+", adress="+
+                "SET name='"+object.getName()+"', phone='"+object.getPhone()+"', email='"+object.getEmail()+"', address='"+
                 object.getAddress()+
-                " WHERE id="+id+";";
+                "' WHERE id="+id+";";
         mysql.executeUpdate(query);
 
     }

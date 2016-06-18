@@ -7,7 +7,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
 import models.Customer;
-import models.Employee;
 import models.User;
 import services.stores.CustomerStore;
 
@@ -78,6 +77,23 @@ public class CustomerFormController extends FormController<Customer> implements 
 
         // Add this employee to the database
         CustomerStore.sharedInstance().create(customer);
+
+        // Let the delegate handles the rest
+        delegate.didUpdateDatabase();
+
+        // Then close this window
+        cancelAction();
+
+    }
+
+    @FXML
+    public void editAction() {
+
+        // Gather data from text fields
+        Customer customer = buildCustomer();
+
+        // Add this employee to the database
+        CustomerStore.sharedInstance().update(customer.getId(), customer);
 
         // Let the delegate handles the rest
         delegate.didUpdateDatabase();

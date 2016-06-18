@@ -61,10 +61,11 @@ public class CustomerStore implements StoreType<Customer>, Filterable<Customer> 
 
         String birthday = DateExtensionKt.getTimestamp(object.getBirthday());
         String request = "UPDATE User " +
-                "SET first_name="+object.getFirstName()+", last_name="+object.getLastName()+", sexe="+object.getSexe()
-                    +", phone="+object.getPhone()+", email="+object.getEmail()+", diligence="
-                    +object.getDiligence().rawValue()+", cin="+object.getCin()+", birthday="+birthday+
-                " WHERE id="+id+";";
+                "SET first_name='"+object.getFirstName()+"', last_name='"+object.getLastName()+"', sexe='"+object.getSexe()
+                    +"', phone='"+object.getPhone()+"', email='"+object.getEmail()+"', diligence='"
+                    +object.getDiligence().rawValue()+"', cin='"+object.getCin()+"', birthday='"+birthday+
+                "' WHERE id="+id+";";
+        System.out.println(request);
         mysql.executeUpdate(request);
 
     }

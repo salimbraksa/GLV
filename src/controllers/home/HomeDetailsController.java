@@ -82,11 +82,11 @@ public class HomeDetailsController extends Controller implements FormControllerD
 
         // Initialize filter
         if (filter == null ) {
-            filter = new TableFilter(tableView);
+            // filter = new TableFilter(tableView);
         }
 
         // Update data
-        filter.getBackingList().clear();
+        data.clear();
         for (Object datum : dataSource.getItems()) {
             data.add(datum);
         }

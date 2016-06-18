@@ -9,6 +9,7 @@ import helpers.detailsViewHelpers.CustomerDetailsViewHelper;
 import helpers.detailsViewHelpers.DetailsViewHelper;
 import helpers.detailsViewHelpers.EmployeeDetailsViewHelper;
 import helpers.detailsViewDataSources.*;
+import helpers.detailsViewHelpers.SupplierDetailsViewHelper;
 import helpers.interfaces.DetailsViewDataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -120,7 +121,10 @@ public class HomeController extends Controller implements Initializable, FormCon
                 break;
 
             case Supplier:
-                dataSource = new SupplierDetailsViewDataSource( (ArrayList<Supplier>) modelType.getStore().findAll()); break;
+                dataSource = new SupplierDetailsViewDataSource();
+                modelHelper = new SupplierDetailsViewHelper();
+                break;
+
             case Vehicle:
                 dataSource = new VehicleDetailsViewDataSource( (ArrayList<Vehicule>) modelType.getStore().findAll()); break;
             case Rent:
