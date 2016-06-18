@@ -26,6 +26,21 @@ public class OrderStore implements StoreType<Order> {
 
     @Override
     public void create(Order object) {
+        String type = object.getClass().getSimpleName();
+
+        if (type=="Order") {
+            String query = "INSERT INTO Order (coast, supplier_id, vehicule_id, date, type) " +
+                    "VALUES ('" + object.getCost() + "','" + object.getSupplierId() + "','" + object.getVehiculeId()
+                    + "','" + object.getDate() + "','" + type + "');";
+            mysql.executeUpdate(query);
+        }
+        else{
+            String query = "INSERT INTO Order (coast, supplier_id, vehicule_id, date, end_date, type) " +
+                    "VALUES ('" + object.getCost() + "','" + object.getSupplierId() + "','" + object.getVehiculeId()
+                    + "','" + object.getDate() +  "','" + ((Lease) object).getEndDate() + "','" + type + "');";
+            mysql.executeUpdate(query);
+        }
+
     }
 
     @Override
@@ -35,6 +50,23 @@ public class OrderStore implements StoreType<Order> {
 
     @Override
     public void update(int id, Order object) {
+        
+        String type = object.getClass().getSimpleName();
+
+        if (type=="Order"){
+            String update = "UPDATE order SET "+
+                    "coast="+object.getCost()+", supplier_id="+object.getSupplierId()+", vehicule_id="+object.getVehiculeId()
+                    +", date="+object.getDate()+", type="+object.getType()+" WHERE id="+id+";";
+            mysql.executeUpdate(update);
+        }
+        else {
+            String update = "UPDATE order SET "+
+                    "coast="+object.getCost()+", supplier_id="+object.getSupplierId()+", vehicule_id="+
+                    object.getVehiculeId() +", date="+object.getDate()+", end_date="+((Lease) object).getEndDate()+
+                    ", type="+object.getType()+" WHERE id="+id+";";
+            mysql.executeUpdate(update);
+        }
+
     }
 
     @Override
