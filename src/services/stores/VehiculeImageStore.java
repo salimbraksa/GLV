@@ -30,7 +30,7 @@ public class VehiculeImageStore {
 
             // copy the Image to /images directory
 
-            String newPath = System.getProperty("user.dir")+"/ressources/images/"+vehicule.getId();
+            String newPath = System.getProperty("user.dir")+"/ressources/images_tmp/"+vehicule.getId();
 
             File destFile = new File(newPath);
 
@@ -42,6 +42,23 @@ public class VehiculeImageStore {
             }
 
         }
+    }
+
+    public void confirmVehiculeImage(Vehicule vehicule){
+
+        String srcUrl = System.getProperty("user.dir")+"/ressources/images_tmp/"+vehicule.getId();
+        String destUrl = System.getProperty("user.dir")+"/ressources/images/"+vehicule.getId();
+
+        File srcFile = new File(srcUrl);
+        File destFile = new File(destUrl);
+
+        try {
+            copyDirectory(srcFile,destFile);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void copyDirectory(File sourceLocation , File targetLocation)
