@@ -24,7 +24,7 @@ public class FormController<T> extends Controller {
 
     // Attributes
 
-    private Object model;
+    public Object model;
     public FormControllerDelegate delegate;
 
     // Getters & Setters
@@ -34,7 +34,12 @@ public class FormController<T> extends Controller {
     }
 
     @FXML
-    void cancelAction() {
+    public void editAction() {
+
+    }
+
+    @FXML
+    public void cancelAction() {
         window.close();
     }
 

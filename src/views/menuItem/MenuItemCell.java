@@ -16,6 +16,7 @@ public class MenuItemCell extends ListCell<MenuItemModel> {
     @Override
     protected void updateItem(MenuItemModel item, boolean empty) {
         super.updateItem(item, empty);
+        getStyleClass().add("menu-list-cell");
 
         // Handling the case of empty
         if (empty) {

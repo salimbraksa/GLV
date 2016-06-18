@@ -4,8 +4,8 @@ import controllers.Controller;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import helpers.AppModels;
 import helpers.ControllerLoader;
-import helpers.detailsViewBuilders.DetailsViewBuilder;
-import helpers.detailsViewBuilders.EmployeeDetailsViewBuilder;
+import helpers.detailsViewHelpers.DetailsViewHelper;
+import helpers.detailsViewHelpers.EmployeeDetailsViewHelper;
 import helpers.detailsViewDataSources.*;
 import helpers.interfaces.DetailsViewDataSource;
 import javafx.collections.FXCollections;
@@ -104,12 +104,12 @@ public class HomeController extends Controller implements Initializable {
         // Get all items of selected resource
         AppModels modelType = cell.getItem().getModelType();
         DetailsViewDataSource<?> dataSource = null;
-        DetailsViewBuilder viewBuilder = null;
+        DetailsViewHelper viewBuilder = null;
 
         switch (modelType) {
             case Employee:
                 dataSource = new EmployeeDetailsViewDataSource();
-                viewBuilder = new EmployeeDetailsViewBuilder();
+                viewBuilder = new EmployeeDetailsViewHelper();
                 break;
 
             case Customer:
@@ -144,14 +144,14 @@ public class HomeController extends Controller implements Initializable {
 
     }
 
-    private void setDetailView(DetailsViewDataSource<?> dataSource, DetailsViewBuilder viewBuilder, AppModels associatedModel) {
+    private void setDetailView(DetailsViewDataSource<?> dataSource, DetailsViewHelper viewBuilder, AppModels associatedModel) {
 
         ControllerLoader loader = new ControllerLoader("/views/home/resource_index.fxml");
         Parent detailView = loader.getScene().getRoot();
         HomeDetailsController controller = (HomeDetailsController) loader.getController();
         controller.dataSource = dataSource;
         controller.associatedModel = associatedModel;
-        controller.viewBuilder = viewBuilder;
+        controller.modelHelper = viewBuilder;
         controller.reloadData();
         configureDetailView(detailView);
         detailPane.getChildren().setAll(detailView);

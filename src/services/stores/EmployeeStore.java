@@ -55,10 +55,12 @@ public class EmployeeStore implements StoreType<Employee>, Filterable<Employee> 
     public void update(int id, Employee object) {
 
         String type = object.getClass().getSimpleName();
-        mysql.executeUpdate("UPDATE User" +
-                "SET first_name="+object.getFirstName()+", last_name="+object.getLastName()+", sexe="+object.getSexe()
-                +", phone="+object.getPhone()+", email="+object.getEmail()+", type="+type+
-                "WHERE id="+id+";");
+        String query = "UPDATE User " +
+                "SET first_name='"+object.getFirstName()+"', last_name='"+object.getLastName()+"', sexe='"+object.getSexe()
+                +"', phone='"+object.getPhone()+"', email='"+object.getEmail()+"', type='"+type+
+                "' WHERE id="+id+";";
+        System.out.println(query);
+        mysql.executeUpdate(query);
 
     }
 

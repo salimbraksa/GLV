@@ -46,19 +46,19 @@
     -fx-padding: 0 0 0 0;
 }
 
-.list-cell {
+.menu-list-cell {
 	-fx-padding: 0 0 0 0;
     -fx-background-color: #2B3744;
 }
 
-.list-cell:odd {
+.menu-list-cell:odd {
     -fx-background-color: transparent;
 }
 
-.list-cell:filled:selected {
+.menu-list-cell:filled:selected {
     -fx-background-color: #EB6B60;
 }
 
-.list-cell:empty {
+.menu-list-cell:empty {
     -fx-background-color: transparent;
 }

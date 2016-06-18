@@ -60,6 +60,33 @@ public class EmployeeFormController extends FormController<Employee> implements 
     void doneAction() {
 
         // Gather data from text fields
+        Employee employee = buildEmployee();
+
+        // Add this employee to the database
+        EmployeeStore.sharedInstance().create(employee);
+
+        // Let the delegate handles the rest
+        delegate.didUpdateDatabase();
+
+        // Then close this window
+        cancelAction();
+
+    }
+
+    @Override
+    public void editAction() {
+
+        Employee employee = buildEmployee();
+        EmployeeStore.sharedInstance().update(employee.getId(), employee);
+        delegate.didUpdateDatabase();
+        cancelAction();
+
+    }
+
+    // Helpers
+
+    private Employee buildEmployee() {
+
         String firstName = this.firstName.getText();
         String lastName = this.lastName.getText();
         String email = this.email.getText();
@@ -70,22 +97,16 @@ public class EmployeeFormController extends FormController<Employee> implements 
         Employee employee = null;
 
         // Instantiate the employee
-        if (role == Employee.Role.Manager) {
-            employee = new Manager(-1, firstName, lastName, gender, email, phone, password);
-        } else if (role == Employee.Role.Admin) {
-            employee = new Admin(-1, firstName, lastName, gender, email, phone, password);
-        } else {
-            return;
+        int id = -1;
+        if ( model instanceof Employee ) {
+            id = ((Employee) model).getId();
         }
-
-        // Add this employee to the database
-        EmployeeStore.sharedInstance().create(employee);
-
-        // Let the delegate handles the rest
-        delegate.didUpdateDatabase();
-
-        // Then close this window
-        cancelAction();
+        if (role == Employee.Role.Manager) {
+            employee = new Manager(id, firstName, lastName, gender, email, phone, password);
+        } else if (role == Employee.Role.Admin) {
+            employee = new Admin(id, firstName, lastName, gender, email, phone, password);
+        }
+        return employee;
 
     }
 
