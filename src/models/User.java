@@ -12,8 +12,8 @@ public abstract class User {
 
         public String rawValue() {
             switch (this) {
-                case Male: return "male";
-                case Female: return "female";
+                case Male: return "Male";
+                case Female: return "Female";
             }
             return null;
         }

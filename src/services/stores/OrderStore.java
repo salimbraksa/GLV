@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by chaymaebz on 14/05/16.
  */
-public class OrderStore implements StoreType<Order>, Filterable<Order> {
+public class OrderStore implements StoreType<Order> {
 
     // Singleton implementation
     static private OrderStore singleton = new OrderStore();
@@ -30,7 +30,7 @@ public class OrderStore implements StoreType<Order>, Filterable<Order> {
 
     @Override
     public void delete(int id) {
-        mysql.executeUpdate("DELETE FROM Lease WHERE id="+id+";");
+        mysql.executeUpdate("DELETE FROM orders WHERE id="+id+";");
     }
 
     @Override
@@ -55,8 +55,4 @@ public class OrderStore implements StoreType<Order>, Filterable<Order> {
         return orders;
     }
 
-    @Override
-    public ArrayList<Order> filterBy(String column, String value) {
-        return null;
-    }
 }

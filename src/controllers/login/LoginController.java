@@ -24,6 +24,16 @@ public class LoginController extends Controller implements AuthenticationDelegat
     public PasswordField passwordField;
     public TextField usernameField;
 
+    // Super Methods
+
+    @Override
+    public void show(double width, double height) {
+        super.show(width, height);
+        window.setTitle("Login");
+        window.setResizable(false);
+    }
+
+
     // User Interactions
 
     public void cancelAction() {
@@ -48,16 +58,13 @@ public class LoginController extends Controller implements AuthenticationDelegat
 
         // Open dashboard
         ControllerLoader loader = new ControllerLoader("/views/home/home.fxml");
-        Stage homeStage = new Stage();
-        Scene homeScene = loader.getScene();
-        homeStage.setTitle("Dashboard");
-        homeStage.setScene(loader.getScene());
-        homeStage.show();
+        Controller controller = loader.getController();
+        controller.show(600, 400);
+        controller.window.setTitle("Dashboard");
 
         // Close current window
         Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.close();
-
 
     }
 

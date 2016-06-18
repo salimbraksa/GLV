@@ -33,6 +33,11 @@ public class RentDetailsViewDataSource implements DetailsViewDataSource<Rent> {
     // Interface Methods
 
     @Override
+    public void reloadItems() {
+
+    }
+
+    @Override
     public String valueOfSummaryAtIndex(int index) {
         long count;
         switch (index) {
@@ -52,13 +57,11 @@ public class RentDetailsViewDataSource implements DetailsViewDataSource<Rent> {
         }
     }
 
-    @Override
     public String[] getTableViewColumns() {
         String[] array = {"id", "vehiculeId", "customerId", "startDate", "endDate", "pickupLocation", "dropLocation"};
         return array;
     }
 
-    @Override
     public PropertyValueFactory getPropertyValueFactoryForColumn(String colName) {
         return new PropertyValueFactory<Rent, String>(colName);
     }

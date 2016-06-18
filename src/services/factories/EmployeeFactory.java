@@ -37,9 +37,11 @@ public class EmployeeFactory {
         String password = result.getString("password");
         String type = result.getString("type");
 
-        if (type.equals("admin")) {
+        System.out.println("Type: " + type + " | Name: " + firstName);
+
+        if (type.equals(Employee.Role.Admin.rawValue())) {
             return new Admin(id, firstName, lastName, sex, email, phone, password);
-        } else if (type.equals("manager")) {
+        } else if (type.equals(Employee.Role.Manager.rawValue())) {
             return new Manager(id, firstName, lastName, sex, email, phone, password);
         }
 

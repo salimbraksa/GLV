@@ -5,6 +5,8 @@ import controllers.forms.FormController;
 import controllers.forms.FormControllerDelegate;
 import helpers.AppModels;
 import helpers.SBError;
+import helpers.detailsViewBuilders.DetailsViewBuilder;
+import helpers.detailsViewBuilders.EmployeeDetailsViewBuilder;
 import helpers.interfaces.DetailsViewDataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +15,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import models.Employee;
 import org.controlsfx.control.table.TableFilter;
+import services.stores.EmployeeStore;
 
 /**
  * Created by Salim on 6/15/16.
@@ -23,6 +27,8 @@ public class HomeDetailsController extends Controller implements FormControllerD
     // Attributes
 
     public DetailsViewDataSource<?> dataSource;
+    public DetailsViewBuilder viewBuilder;
+
     public AppModels associatedModel;
     private ObservableList<Object> data;
 
@@ -51,16 +57,19 @@ public class HomeDetailsController extends Controller implements FormControllerD
         rightSummaryName.setText(dataSource.nameOfSummaryAtIndex(1));
 
         // Add Table View Columns
-        tableView.getItems().clear();
         tableView.getColumns().clear();
-        for (String colName : dataSource.getTableViewColumns()) {
+        for (String colName : viewBuilder.getTableColumnNames()) {
             TableColumn column = new TableColumn(colName);
-            column.setCellValueFactory(dataSource.getPropertyValueFactoryForColumn(colName));
+            column.setCellValueFactory(viewBuilder.getPropertyValueFactoryFromColumnName(colName));
             tableView.getColumns().add(column);
         }
 
         // Update data
-        data = FXCollections.observableArrayList();
+        if (data != null) {
+            data.clear();
+        } else {
+            data = FXCollections.observableArrayList();
+        }
         for (Object datum : dataSource.getItems()) {
             data.add(datum);
         }
@@ -80,6 +89,7 @@ public class HomeDetailsController extends Controller implements FormControllerD
 
         // Get appropriate form
         FormController<?> formController = associatedModel.getFormController(FormController.FormType.New);
+        formController.delegate = this;
 
         // Show
         formController.show(400, 600);
@@ -91,9 +101,10 @@ public class HomeDetailsController extends Controller implements FormControllerD
 
         // Get appropriate form
         FormController<?> formController = associatedModel.getFormController(FormController.FormType.Edit);
+        formController.delegate = this;
         Object selectedItem = tableView.getSelectionModel().getSelectedItem();
-        if (selectedItem == null) {
-            SBError error = new SBError("Error", "Please select an item to edit");
+        if (!itemIsSelected()) {
+            SBError error = new SBError("Error", "Please select an item to show");
             showError(error);
             return;
         }
@@ -110,7 +121,7 @@ public class HomeDetailsController extends Controller implements FormControllerD
         // Get appropriate form
         FormController<?> formController = associatedModel.getFormController(FormController.FormType.Show);
         Object selectedItem = tableView.getSelectionModel().getSelectedItem();
-        if (selectedItem == null) {
+        if (!itemIsSelected()) {
             SBError error = new SBError("Error", "Please select an item to show");
             showError(error);
             return;
@@ -122,14 +133,38 @@ public class HomeDetailsController extends Controller implements FormControllerD
 
     }
 
-    // Form Controller Delegate
+    @FXML
+    private void deleteItem() {
 
-    @Override
-    public void didFinishEditingWithModel(Object model) {
+        // Check if an item is not selected
+        if (!itemIsSelected()) {
+            SBError error = new SBError("Error", "Please select an item to show");
+            showError(error);
+        }
+
+        // Get the item
+        Object selectedItem = tableView.getSelectionModel().getSelectedItem();
+        Employee employee = ((EmployeeDetailsViewBuilder) viewBuilder).castedItem(selectedItem);
+        EmployeeStore.sharedInstance().delete(employee.getId());
+        dataSource.reloadItems();
+        reloadData();
 
     }
 
+    // Form Controller Delegate
+
+    @Override
+    public void didUpdateDatabase() {
+        dataSource.reloadItems();
+        reloadData();
+    }
+
     // Helpers
+
+    private boolean itemIsSelected() {
+        Object selectedItem = tableView.getSelectionModel().getSelectedItem();
+        return selectedItem != null;
+    }
 
     private void showError(SBError error) {
         String title = ((SBError) error).getTitle();

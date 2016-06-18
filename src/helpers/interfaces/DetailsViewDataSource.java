@@ -15,8 +15,6 @@ public interface DetailsViewDataSource<T> {
 
     ArrayList<T> getItems();
 
-    String[] getTableViewColumns();
-
-    PropertyValueFactory getPropertyValueFactoryForColumn(String colName);
+    void reloadItems();
 
 }

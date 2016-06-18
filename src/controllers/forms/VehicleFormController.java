@@ -30,13 +30,7 @@ public class VehicleFormController extends FormController<Vehicule> implements I
         state.getItems().addAll(Vehicule.State.Good, Vehicule.State.Bad);
     }
 
-
     // Overriding Super Methods
-
-    @Override
-    public void setEditable(boolean editable) {
-        super.setEditable(editable);
-    }
 
     @Override
     public void setModel(Object model) {

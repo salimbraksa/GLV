@@ -58,11 +58,6 @@ public class RentFormController extends FormController<Rent> implements Initiali
     // Overriding Super Methods
 
     @Override
-    public void setEditable(boolean editable) {
-        super.setEditable(editable);
-    }
-
-    @Override
     public void setModel(Object model) {
         super.setModel(model);
         Rent rent = (Rent) model;

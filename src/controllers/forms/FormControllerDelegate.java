@@ -5,6 +5,6 @@ package controllers.forms;
  */
 public interface FormControllerDelegate {
 
-    void didFinishEditingWithModel(Object model);
+    void didUpdateDatabase();
 
 }

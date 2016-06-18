@@ -52,13 +52,11 @@ public class VehicleDetailsViewDataSource implements DetailsViewDataSource<Vehic
         }
     }
 
-    @Override
     public String[] getTableViewColumns() {
         String[] array = {"id", "type", "price", "state", "currentStock", "totalStock"};
         return array;
     }
 
-    @Override
     public PropertyValueFactory getPropertyValueFactoryForColumn(String colName) {
         switch (colName) {
             case "id": return new PropertyValueFactory<Vehicule, String>("id");
@@ -71,4 +69,8 @@ public class VehicleDetailsViewDataSource implements DetailsViewDataSource<Vehic
         }
     }
 
+    @Override
+    public void reloadItems() {
+
+    }
 }

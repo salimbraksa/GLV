@@ -1,6 +1,7 @@
 package controllers.forms;
 
 import controllers.Controller;
+import javafx.fxml.FXML;
 
 /**
  * Created by Salim on 6/15/16.
@@ -24,25 +25,17 @@ public class FormController<T> extends Controller {
     // Attributes
 
     private Object model;
-    private boolean editable = false;
-    private FormControllerDelegate delegate;
+    public FormControllerDelegate delegate;
 
     // Getters & Setters
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
-
-    public boolean getEditable() {
-        return editable;
-    }
 
     public void setModel(Object model) {
         this.model = model;
     }
 
-    public void setDelegate(FormControllerDelegate delegate) {
-        this.delegate = delegate;
+    @FXML
+    void cancelAction() {
+        window.close();
     }
 
 }

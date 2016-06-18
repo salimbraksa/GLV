@@ -3,8 +3,11 @@ package controllers.forms;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import models.Admin;
 import models.Employee;
+import models.Manager;
 import models.User;
+import services.stores.EmployeeStore;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,13 +38,7 @@ public class EmployeeFormController extends FormController<Employee> implements 
 
     }
 
-
     // Overriding Super Methods
-
-    @Override
-    public void setEditable(boolean editable) {
-        super.setEditable(editable);
-    }
 
     @Override
     public void setModel(Object model) {
@@ -54,6 +51,41 @@ public class EmployeeFormController extends FormController<Employee> implements 
         phone.setText(employee.getPhone());
         gender.setValue(employee.getSexe());
         role.setValue(employee.getRole());
+
+    }
+
+    // User Interaction
+
+    @FXML
+    void doneAction() {
+
+        // Gather data from text fields
+        String firstName = this.firstName.getText();
+        String lastName = this.lastName.getText();
+        String email = this.email.getText();
+        String phone = this.phone.getText();
+        User.Sexe gender = this.gender.getValue();
+        String password = this.password.getText();
+        Employee.Role role = this.role.getValue();
+        Employee employee = null;
+
+        // Instantiate the employee
+        if (role == Employee.Role.Manager) {
+            employee = new Manager(-1, firstName, lastName, gender, email, phone, password);
+        } else if (role == Employee.Role.Admin) {
+            employee = new Admin(-1, firstName, lastName, gender, email, phone, password);
+        } else {
+            return;
+        }
+
+        // Add this employee to the database
+        EmployeeStore.sharedInstance().create(employee);
+
+        // Let the delegate handles the rest
+        delegate.didUpdateDatabase();
+
+        // Then close this window
+        cancelAction();
 
     }
 

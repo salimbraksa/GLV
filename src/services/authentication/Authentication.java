@@ -22,7 +22,6 @@ public class Authentication {
         ArrayList<Employee> employees = EmployeeStore.sharedInstance().filterBy(UserFilter.email, username);
         Employee employee = ArrayListExtensionKt.getFirst(employees);
         SBError error = new SBError("Authentication Error", "The email address or password you entered is not valid");
-
         if (employee != null) {
 
             // Compare Password

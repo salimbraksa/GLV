@@ -51,15 +51,17 @@ public class OrderDetailsViewDataSource implements DetailsViewDataSource<Order> 
         }
     }
 
-    @Override
     public String[] getTableViewColumns() {
         String[] array = {"id", "cost", "supplierId", "vehiculeId", "date", "endDate"};
         return array;
     }
 
-    @Override
     public PropertyValueFactory getPropertyValueFactoryForColumn(String colName) {
         return new PropertyValueFactory<Order, String>(colName);
     }
 
+    @Override
+    public void reloadItems() {
+
+    }
 }

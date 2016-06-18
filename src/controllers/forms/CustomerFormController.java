@@ -48,11 +48,6 @@ public class CustomerFormController extends FormController<Customer> implements 
     // Overriding Super Methods
 
     @Override
-    public void setEditable(boolean editable) {
-        super.setEditable(editable);
-    }
-
-    @Override
     public void setModel(Object model) {
         super.setModel(model);
         Customer customer = (Customer) model;

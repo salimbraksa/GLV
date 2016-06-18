@@ -9,8 +9,8 @@ public abstract class Employee extends User {
         Admin, Manager;
         public String rawValue() {
             switch (this) {
-                case Admin: return "admin";
-                case Manager: return "manager";
+                case Admin: return "Admin";
+                case Manager: return "Manager";
                 default: return null;
             }
         }

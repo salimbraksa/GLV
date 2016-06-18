@@ -20,12 +20,14 @@ public class Controller  {
     // Attributes
 
     public Parent view;
+    public Stage window;
 
     // Methods
 
     public void show(double width, double height) {
 
         Stage stage = new Stage();
+        window = stage;
         stage.setScene(view.getScene());
         stage.show();
 

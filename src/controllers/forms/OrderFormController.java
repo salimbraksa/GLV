@@ -52,11 +52,6 @@ public class OrderFormController extends FormController<Order> implements Initia
     // Overriding Super Methods
 
     @Override
-    public void setEditable(boolean editable) {
-        super.setEditable(editable);
-    }
-
-    @Override
     public void setModel(Object model) {
         super.setModel(model);
         Order order = (Order) model;

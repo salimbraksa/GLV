@@ -4,6 +4,8 @@ import controllers.Controller;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import helpers.AppModels;
 import helpers.ControllerLoader;
+import helpers.detailsViewBuilders.DetailsViewBuilder;
+import helpers.detailsViewBuilders.EmployeeDetailsViewBuilder;
 import helpers.detailsViewDataSources.*;
 import helpers.interfaces.DetailsViewDataSource;
 import javafx.collections.FXCollections;
@@ -89,6 +91,9 @@ public class HomeController extends Controller implements Initializable {
 
     @FXML
     void signOut() {
+        ControllerLoader loader = new ControllerLoader("/views/login/login.fxml");
+        loader.getController().show(600, 400);
+        window.close();
     }
 
     public void cellClicked(MenuItemCell cell) {
@@ -99,10 +104,14 @@ public class HomeController extends Controller implements Initializable {
         // Get all items of selected resource
         AppModels modelType = cell.getItem().getModelType();
         DetailsViewDataSource<?> dataSource = null;
+        DetailsViewBuilder viewBuilder = null;
 
         switch (modelType) {
             case Employee:
-                dataSource = new EmployeeDetailsViewDataSource( (ArrayList<Employee>) modelType.getStore().findAll()); break;
+                dataSource = new EmployeeDetailsViewDataSource();
+                viewBuilder = new EmployeeDetailsViewBuilder();
+                break;
+
             case Customer:
                 dataSource = new CustomerDetailsViewDataSource( (ArrayList<Customer>) modelType.getStore().findAll()); break;
             case Supplier:
@@ -120,7 +129,7 @@ public class HomeController extends Controller implements Initializable {
             setEmptyStateView();
             return;
         }
-        setDetailView(dataSource, modelType);
+        setDetailView(dataSource, viewBuilder, modelType);
 
     }
 
@@ -135,13 +144,14 @@ public class HomeController extends Controller implements Initializable {
 
     }
 
-    private void setDetailView(DetailsViewDataSource<?> dataSource, AppModels associatedModel) {
+    private void setDetailView(DetailsViewDataSource<?> dataSource, DetailsViewBuilder viewBuilder, AppModels associatedModel) {
 
         ControllerLoader loader = new ControllerLoader("/views/home/resource_index.fxml");
         Parent detailView = loader.getScene().getRoot();
         HomeDetailsController controller = (HomeDetailsController) loader.getController();
         controller.dataSource = dataSource;
         controller.associatedModel = associatedModel;
+        controller.viewBuilder = viewBuilder;
         controller.reloadData();
         configureDetailView(detailView);
         detailPane.getChildren().setAll(detailView);

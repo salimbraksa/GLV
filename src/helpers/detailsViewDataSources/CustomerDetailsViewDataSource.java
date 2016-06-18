@@ -53,12 +53,15 @@ public class CustomerDetailsViewDataSource implements DetailsViewDataSource<Cust
     }
 
     @Override
+    public void reloadItems() {
+
+    }
+
     public String[] getTableViewColumns() {
         String[] array = {"id", "first name", "last name", "sexe", "email", "phone", "diligence", "cin", "birthday"};
         return array;
     }
 
-    @Override
     public PropertyValueFactory getPropertyValueFactoryForColumn(String colName) {
         switch (colName) {
             case "id": return new PropertyValueFactory<Customer, String>("id");

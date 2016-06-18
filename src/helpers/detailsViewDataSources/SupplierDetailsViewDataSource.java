@@ -50,12 +50,15 @@ public class SupplierDetailsViewDataSource implements DetailsViewDataSource<Supp
     }
 
     @Override
+    public void reloadItems() {
+
+    }
+
     public String[] getTableViewColumns() {
         String[] array = {"id", "name", "email", "phone", "address"};
         return array;
     }
 
-    @Override
     public PropertyValueFactory getPropertyValueFactoryForColumn(String colName) {
         switch (colName) {
             case "id": return new PropertyValueFactory<Supplier, String>("id");
