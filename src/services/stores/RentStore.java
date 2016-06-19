@@ -67,7 +67,7 @@ public class RentStore implements StoreType<Rent>, Filterable<Rent>{
         String end_date = DateExtensionKt.getTimestamp(object.getEndDate());
         String query = "Update Rent SET customer_id="+object.getCustomerId()+", vehicule_id="+object.getVehiculeId()+", start_date='"
                         +start_date+ "', end_date='"+end_date+"', pickup_location='"+object.getPickupLocation()+"', " +
-                        " drop_location='"+ object.getDropLocation() +"'";
+                        " drop_location='"+ object.getDropLocation() +"' WHERE id="+object.getId();
         System.out.println(query);
         mysql.executeUpdate(query);
     }

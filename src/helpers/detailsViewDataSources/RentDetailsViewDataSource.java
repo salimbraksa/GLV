@@ -7,6 +7,7 @@ import models.Rent;
 import services.stores.RentStore;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Salim on 6/15/16.
@@ -43,7 +44,7 @@ public class RentDetailsViewDataSource implements DetailsViewDataSource<Rent> {
         long count;
         switch (index) {
             case 0: count = items.size(); break;
-            case 1: count = 0; break;
+            case 1: count = items.stream().filter(p ->  (new Date()).compareTo(p.getEndDate()) > 0).count(); break;
             default: return null;
         }
         return "" + count;
