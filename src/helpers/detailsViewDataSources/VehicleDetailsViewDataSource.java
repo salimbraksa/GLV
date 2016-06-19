@@ -4,6 +4,7 @@ import helpers.interfaces.DetailsViewDataSource;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Vehicule;
 import models.User;
+import services.stores.VehiculeStore;
 
 import java.util.ArrayList;
 
@@ -26,8 +27,8 @@ public class VehicleDetailsViewDataSource implements DetailsViewDataSource<Vehic
 
     // Constructors
 
-    public VehicleDetailsViewDataSource(ArrayList<Vehicule> items) {
-        this.items = items;
+    public VehicleDetailsViewDataSource() {
+        reloadItems();
     }
 
     // Interface Methods
@@ -51,26 +52,9 @@ public class VehicleDetailsViewDataSource implements DetailsViewDataSource<Vehic
             default: return null;
         }
     }
-
-    public String[] getTableViewColumns() {
-        String[] array = {"id", "type", "price", "state", "currentStock", "totalStock"};
-        return array;
-    }
-
-    public PropertyValueFactory getPropertyValueFactoryForColumn(String colName) {
-        switch (colName) {
-            case "id": return new PropertyValueFactory<Vehicule, String>("id");
-            case "type": return new PropertyValueFactory<Vehicule, String>("type");
-            case "price": return new PropertyValueFactory<Vehicule, String>("price");
-            case "state": return new PropertyValueFactory<Vehicule, String>("state");
-            case "currentStock": return new PropertyValueFactory<Vehicule, String>("currentStock");
-            case "totalStock": return new PropertyValueFactory<Vehicule, String>("totalStock");
-            default: return null;
-        }
-    }
-
     @Override
     public void reloadItems() {
-
+        items = VehiculeStore.sharedInstance().findAll();
     }
+
 }

@@ -1,9 +1,15 @@
 package services.stores;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.Vehicule;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 
@@ -20,76 +26,55 @@ public class VehiculeImageStore {
 
     // Methodes
 
-    public void setVehiculeImageToStore(Vehicule vehicule, Stage stage) {
-        FileChooser fileChooser = new FileChooser();
+    public Image setVehiculeImageToStore(Vehicule vehicule, Stage stage) {
 
+        // Set up file chooser
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG);
         File sourceFile = fileChooser.showOpenDialog(stage);
 
         if(sourceFile!=null){
-
-
             // copy the Image to /images directory
 
-            String newPath = System.getProperty("user.dir")+"/ressources/images_tmp/"+vehicule.getId();
-
+            String newPath = System.getProperty("user.dir")+"/ressources/images/"+vehicule.getId()+"."+FilenameUtils.getExtension(sourceFile.getPath());
             File destFile = new File(newPath);
 
+            // Copy from source file to destination file
             try {
-                copyDirectory(sourceFile,destFile);
-
-            } catch (IOException e) {
+                FileUtils.copyFile(sourceFile, destFile);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
+
+        // Get the image out of the file chooser
+        try {
+            BufferedImage bufferedImage = ImageIO.read(sourceFile);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            return image;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+
     }
 
-    public void confirmVehiculeImage(Vehicule vehicule){
+    public void removeVehicleImage(Vehicule vehicle) {
 
-        String srcUrl = System.getProperty("user.dir")+"/ressources/images_tmp/"+vehicule.getId();
-        String destUrl = System.getProperty("user.dir")+"/ressources/images/"+vehicule.getId();
+        // Get path
+        String newPath = System.getProperty("user.dir") + "/ressources/images/"+vehicle.getId()+".jpg";
+        File file = new File(newPath);
 
-        File srcFile = new File(srcUrl);
-        File destFile = new File(destUrl);
-
+        // Remove it
         try {
-            copyDirectory(srcFile,destFile);
-
-        } catch (IOException e) {
+            FileUtils.forceDelete(file);
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
 
     }
-
-    public void copyDirectory(File sourceLocation , File targetLocation)
-            throws IOException {
-
-        if (sourceLocation.isDirectory()) {
-            if (!targetLocation.exists()) {
-                targetLocation.mkdir();
-            }
-
-            String[] children = sourceLocation.list();
-            for (int i=0; i<children.length; i++) {
-                copyDirectory(new File(sourceLocation, children[i]),
-                        new File(targetLocation, children[i]));
-            }
-        } else {
-
-            InputStream in = new FileInputStream(sourceLocation);
-            OutputStream out = new FileOutputStream(targetLocation);
-
-            // Copy the bits from instream to outstream
-            byte[] buf = new byte[1024];
-            int len;
-            while ((len = in.read(buf)) > 0) {
-                out.write(buf, 0, len);
-            }
-            in.close();
-            out.close();
-        }
-    }
-
-
 
 }

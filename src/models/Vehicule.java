@@ -10,17 +10,15 @@ import java.util.Map;
  */
 public class Vehicule implements Validatable{
 
-
-
     public enum State {
         Good, Bad;
 
         public String rawValue() {
             switch (this) {
                 case Good:
-                    return "good";
+                    return "Good";
                 case Bad:
-                    return "bad";
+                    return "Bad";
                }
             return null;
         }

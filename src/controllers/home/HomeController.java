@@ -5,11 +5,8 @@ import controllers.forms.FormControllerDelegate;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import helpers.AppModels;
 import helpers.ControllerLoader;
-import helpers.detailsViewHelpers.CustomerDetailsViewHelper;
-import helpers.detailsViewHelpers.DetailsViewHelper;
-import helpers.detailsViewHelpers.EmployeeDetailsViewHelper;
+import helpers.detailsViewHelpers.*;
 import helpers.detailsViewDataSources.*;
-import helpers.detailsViewHelpers.SupplierDetailsViewHelper;
 import helpers.interfaces.DetailsViewDataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -126,11 +123,15 @@ public class HomeController extends Controller implements Initializable, FormCon
                 break;
 
             case Vehicle:
-                dataSource = new VehicleDetailsViewDataSource( (ArrayList<Vehicule>) modelType.getStore().findAll()); break;
+                dataSource = new VehicleDetailsViewDataSource();
+                modelHelper = new VehicleDetailsViewHelper();
+                break;
+
             case Rent:
                 dataSource = new RentDetailsViewDataSource( (ArrayList<Rent>) modelType.getStore().findAll()); break;
             case Order:
                 dataSource = new OrderDetailsViewDataSource( (ArrayList<Order>) modelType.getStore().findAll()); break;
+            
         }
 
         detailsViewIsEmpty = dataSource == null || dataSource.getItems().size() == 0;

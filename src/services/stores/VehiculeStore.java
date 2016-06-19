@@ -44,9 +44,11 @@ public class VehiculeStore implements StoreType<Vehicule>, Filterable<Vehicule> 
     @Override
     public void update(int id, Vehicule object) {
 
-        mysql.executeQuery("UPDATE vehicule" +
-                "SET type="+object.getType()+", price="+object.getPrice()+", state"+object.getState().rawValue()+
-                "WHERE id="+id+";");
+        String query = "UPDATE vehicule " +
+                "SET type='"+object.getType()+"', price='"+object.getPrice()+"', state='"+object.getState().rawValue()+
+                "' WHERE id="+id;
+
+        mysql.executeUpdate(query);
 
     }
 
