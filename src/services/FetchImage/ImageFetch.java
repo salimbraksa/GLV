@@ -24,9 +24,9 @@ public class ImageFetch {
     private ImageFetch() {
     }
 
-    public Image getImage(Vehicule vehicule){
+    public Image getImage(String imageName){
 
-        File sourceFile = new File(System.getProperty("user.dir")+"/ressources/images/"+vehicule.getId()+".jpg");
+        File sourceFile = new File(System.getProperty("user.dir")+"/ressources/images/"+imageName);
         try {
             BufferedImage bufferedImage = ImageIO.read(sourceFile);
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);

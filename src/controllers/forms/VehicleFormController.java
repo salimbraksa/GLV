@@ -28,7 +28,9 @@ public class VehicleFormController extends FormController<Vehicule> implements I
     @FXML private TextField currentStock;
     @FXML private TextField totalStock;
     @FXML private ImageView imageView;
-    private boolean imageWasInitiallyNull = true;
+    private boolean removeImage = false;
+
+    private String imageName;
 
     // Initializer
 
@@ -51,8 +53,7 @@ public class VehicleFormController extends FormController<Vehicule> implements I
         currentStock.setText(""+vehicle.getCurrentStock());
         totalStock.setText(""+vehicle.getTotalStock());
 
-        Image image = ImageFetch.sharedInstance().getImage(vehicle);
-        imageWasInitiallyNull = image == null;
+        Image image = ImageFetch.sharedInstance().getImage(vehicle.getImage());
         imageView.setImage(image);
 
     }
@@ -82,8 +83,8 @@ public class VehicleFormController extends FormController<Vehicule> implements I
         // Hack
         if (this.type.isDisabled()) {
         } else {
-            if (imageWasInitiallyNull) {
-                VehiculeImageStore.sharedInstance().removeVehicleImage((Vehicule) model);
+            if (removeImage && imageName != null) {
+                VehiculeImageStore.sharedInstance().removeVehicleImage(imageName);
             }
         }
 
@@ -111,8 +112,9 @@ public class VehicleFormController extends FormController<Vehicule> implements I
     private void chooseImage() {
 
         Vehicule vehicle = (Vehicule) model;
-        if (vehicle == null) { return; }
-        Image image = VehiculeImageStore.sharedInstance().setVehiculeImageToStore(vehicle, window);
+        imageName = VehiculeImageStore.sharedInstance().setVehiculeImageToStore(window);
+        System.out.print(imageName);
+        Image image = ImageFetch.sharedInstance().getImage(imageName);
         if (image != null) {
             imageView.setImage(image);
         }
@@ -135,7 +137,17 @@ public class VehicleFormController extends FormController<Vehicule> implements I
         if ( model instanceof Vehicule ) {
             id = ((Vehicule) model).getId();
         }
-        vehicle = new Vehicule(id, type, price, state, currentStock, totalStock);
+
+        String imageName = null;
+        if (this.imageName != null ) {
+            imageName = this.imageName;
+        } else {
+            if ((Vehicule) model != null) {
+                imageName = ((Vehicule) model).getImage();
+            }
+        }
+
+        vehicle = new Vehicule(id, type, price, state, currentStock, totalStock, imageName);
 
         return vehicle;
 

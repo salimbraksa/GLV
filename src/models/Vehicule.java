@@ -33,17 +33,20 @@ public class Vehicule implements Validatable{
     private State state;
     public int currentStock;
     private int totalStock;
+    private String image;
 
     // Constructor
 
-    public Vehicule(int id, String type, double price, State state, int currentStock, int totalStock){
+    public Vehicule(int id, String type, double price, State state, int currentStock, int totalStock, String image){
         this.id = id;
         this.type = type;
         this.price = price;
         this.state = state;
         this.currentStock = currentStock;
         this.totalStock = totalStock;
+        this.image = image;
     }
+
 
 
     public Vehicule(int id){
@@ -74,6 +77,10 @@ public class Vehicule implements Validatable{
 
     public String getType() {
         return type;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     @Override

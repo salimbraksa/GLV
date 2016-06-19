@@ -26,18 +26,18 @@ public class VehiculeImageStore {
 
     // Methodes
 
-    public Image setVehiculeImageToStore(Vehicule vehicule, Stage stage) {
+    public String setVehiculeImageToStore(Stage stage) {
 
         // Set up file chooser
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         fileChooser.getExtensionFilters().addAll(extFilterJPG);
         File sourceFile = fileChooser.showOpenDialog(stage);
+        String filename = sourceFile.getName();
 
         if(sourceFile!=null){
             // copy the Image to /images directory
-
-            String newPath = System.getProperty("user.dir")+"/ressources/images/"+vehicule.getId()+"."+FilenameUtils.getExtension(sourceFile.getPath());
+            String newPath = System.getProperty("user.dir")+"/ressources/images/"+filename;
             File destFile = new File(newPath);
 
             // Copy from source file to destination file
@@ -50,22 +50,14 @@ public class VehiculeImageStore {
         }
 
         // Get the image out of the file chooser
-        try {
-            BufferedImage bufferedImage = ImageIO.read(sourceFile);
-            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-            return image;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return null;
+        return filename;
 
     }
 
-    public void removeVehicleImage(Vehicule vehicle) {
+    public void removeVehicleImage(String imageName) {
 
         // Get path
-        String newPath = System.getProperty("user.dir") + "/ressources/images/"+vehicle.getId()+".jpg";
+        String newPath = System.getProperty("user.dir") + "/ressources/images/"+imageName;
         File file = new File(newPath);
 
         // Remove it

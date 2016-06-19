@@ -31,8 +31,8 @@ public class VehiculeStore implements StoreType<Vehicule>, Filterable<Vehicule> 
     @Override
     public void create(Vehicule object) {
 
-        String request = "INSERT INTO vehicule (type, price, state, currentStock, totalStock) VALUES ('"+object.getType()+"', '"+object.getPrice()+
-                "', '"+object.getState().rawValue()+ "', '"+ object.getCurrentStock()+ "', '"+ object.getTotalStock() +"');";
+        String request = "INSERT INTO vehicule (type, price, state, currentStock, totalStock, image) VALUES ('"+object.getType()+"', '"+object.getPrice()+
+                "', '"+object.getState().rawValue()+ "', '"+ object.getCurrentStock()+ "', '"+ object.getTotalStock() +"', '"+object.getImage()+"');";
         System.out.println(request);
         mysql.executeUpdate(request);
     }
@@ -47,7 +47,7 @@ public class VehiculeStore implements StoreType<Vehicule>, Filterable<Vehicule> 
 
         String query = "UPDATE vehicule " +
                 "SET type='"+object.getType()+"', price='"+object.getPrice()+"', state='"+object.getState().rawValue()+
-                "', currentStock=" + object.getCurrentStock() + ", totalStock=" + object.getTotalStock() + " WHERE id="+id;
+                "', currentStock=" + object.getCurrentStock() + ", totalStock=" + object.getTotalStock() + ", image='" +object.getImage()+ "' WHERE id="+id;
         System.out.println(query);
         mysql.executeUpdate(query);
 

@@ -30,9 +30,10 @@ public class VehiculeFactory {
         double price = result.getDouble("price");
         int currentStock = result.getInt("currentStock");
         int totalStock = result.getInt("totalStock");
+        String image = result.getString("image");
         Vehicule.State state = Vehicule.State.valueOf(result.getString("state"));
 
-        return new Vehicule(id,type,price,state, currentStock, totalStock);
+        return new Vehicule(id,type,price,state, currentStock, totalStock, image);
 
     }
 
