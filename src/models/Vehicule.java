@@ -31,7 +31,7 @@ public class Vehicule implements Validatable{
     private String type;
     private double price;
     private State state;
-    private int currentStock;
+    public int currentStock;
     private int totalStock;
 
     // Constructor

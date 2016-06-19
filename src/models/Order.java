@@ -11,8 +11,6 @@ import java.util.Map;
  */
 public class Order implements Validatable {
 
-
-
     public enum Type {
         Order, Lease;
     }

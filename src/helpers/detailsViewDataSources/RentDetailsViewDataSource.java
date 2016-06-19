@@ -4,6 +4,7 @@ import helpers.interfaces.DetailsViewDataSource;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Rent;
 import models.Rent;
+import services.stores.RentStore;
 
 import java.util.ArrayList;
 
@@ -26,15 +27,15 @@ public class RentDetailsViewDataSource implements DetailsViewDataSource<Rent> {
 
     // Constructors
 
-    public RentDetailsViewDataSource(ArrayList<Rent> items) {
-        this.items = items;
+    public RentDetailsViewDataSource() {
+        reloadItems();
     }
 
     // Interface Methods
 
     @Override
     public void reloadItems() {
-
+        items = RentStore.sharedInstance().findAll();
     }
 
     @Override
@@ -55,15 +56,6 @@ public class RentDetailsViewDataSource implements DetailsViewDataSource<Rent> {
             case 1: return "Overdue";
             default: return null;
         }
-    }
-
-    public String[] getTableViewColumns() {
-        String[] array = {"id", "vehiculeId", "customerId", "startDate", "endDate", "pickupLocation", "dropLocation"};
-        return array;
-    }
-
-    public PropertyValueFactory getPropertyValueFactoryForColumn(String colName) {
-        return new PropertyValueFactory<Rent, String>(colName);
     }
 
 }

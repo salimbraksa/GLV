@@ -3,6 +3,7 @@ package helpers.detailsViewDataSources;
 import helpers.interfaces.DetailsViewDataSource;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Order;
+import services.stores.OrderStore;
 
 import java.util.ArrayList;
 
@@ -25,8 +26,8 @@ public class OrderDetailsViewDataSource implements DetailsViewDataSource<Order> 
 
     // Constructors
 
-    public OrderDetailsViewDataSource(ArrayList<Order> items) {
-        this.items = items;
+    public OrderDetailsViewDataSource() {
+        reloadItems();
     }
 
     // Interface Methods
@@ -51,17 +52,9 @@ public class OrderDetailsViewDataSource implements DetailsViewDataSource<Order> 
         }
     }
 
-    public String[] getTableViewColumns() {
-        String[] array = {"id", "cost", "supplierId", "vehiculeId", "date", "endDate"};
-        return array;
-    }
-
-    public PropertyValueFactory getPropertyValueFactoryForColumn(String colName) {
-        return new PropertyValueFactory<Order, String>(colName);
-    }
-
     @Override
     public void reloadItems() {
-
+        items = OrderStore.sharedInstance().findAll();
     }
+
 }

@@ -128,10 +128,15 @@ public class HomeController extends Controller implements Initializable, FormCon
                 break;
 
             case Rent:
-                dataSource = new RentDetailsViewDataSource( (ArrayList<Rent>) modelType.getStore().findAll()); break;
+                dataSource = new RentDetailsViewDataSource();
+                modelHelper = new RentDetailsViewHelper();
+                break;
+
             case Order:
-                dataSource = new OrderDetailsViewDataSource( (ArrayList<Order>) modelType.getStore().findAll()); break;
-            
+                dataSource = new OrderDetailsViewDataSource();
+                modelHelper = new OrderDetailsViewHelper();
+                break;
+
         }
 
         detailsViewIsEmpty = dataSource == null || dataSource.getItems().size() == 0;

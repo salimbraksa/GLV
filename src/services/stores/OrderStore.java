@@ -1,5 +1,6 @@
 package services.stores;
 
+import helpers.extensions.DateExtensionKt;
 import helpers.interfaces.Filterable;
 import models.Lease;
 import models.Order;
@@ -27,17 +28,21 @@ public class OrderStore implements StoreType<Order> {
     @Override
     public void create(Order object) {
         String type = object.getClass().getSimpleName();
-
-        if (type=="Order") {
-            String query = "INSERT INTO Order (coast, supplier_id, vehicule_id, date, type) " +
+        String start_date = DateExtensionKt.getTimestamp(object.getDate());
+        if (type.equals("Order")) {
+            String query = "INSERT INTO orders (cost, supplier_id, vehicule_id, date, type) " +
                     "VALUES ('" + object.getCost() + "','" + object.getSupplierId() + "','" + object.getVehiculeId()
-                    + "','" + object.getDate() + "','" + type + "');";
+                    + "','" + start_date + "','" + type + "');";
+            System.out.println(query);
             mysql.executeUpdate(query);
         }
         else{
-            String query = "INSERT INTO Order (coast, supplier_id, vehicule_id, date, end_date, type) " +
+            Lease lease = (Lease) object;
+            String end_date = DateExtensionKt.getTimestamp(lease.getEndDate());
+            String query = "INSERT INTO orders (cost, supplier_id, vehicule_id, date, end_date, type) " +
                     "VALUES ('" + object.getCost() + "','" + object.getSupplierId() + "','" + object.getVehiculeId()
-                    + "','" + object.getDate() +  "','" + ((Lease) object).getEndDate() + "','" + type + "');";
+                    + "','" + start_date +  "','" + end_date + "','" + type + "');";
+            System.out.println(query);
             mysql.executeUpdate(query);
         }
 
@@ -52,19 +57,27 @@ public class OrderStore implements StoreType<Order> {
     public void update(int id, Order object) {
 
         String type = object.getClass().getSimpleName();
+        String start_date = DateExtensionKt.getTimestamp(object.getDate());
 
-        if (type=="Order"){
-            String update = "UPDATE order SET "+
-                    "coast="+object.getCost()+", supplier_id="+object.getSupplierId()+", vehicule_id="+object.getVehiculeId()
-                    +", date="+object.getDate()+", type="+object.getType()+" WHERE id="+id+";";
+        if (type.equals("Order")){
+
+            String update = "UPDATE orders SET "+
+                    "cost="+object.getCost()+", supplier_id="+object.getSupplierId()+", vehicule_id="+object.getVehiculeId()
+                    +", date='"+start_date+"', type='"+object.getType()+"' WHERE id="+id+";";
             mysql.executeUpdate(update);
         }
         else {
-            String update = "UPDATE order SET "+
-                    "coast="+object.getCost()+", supplier_id="+object.getSupplierId()+", vehicule_id="+
-                    object.getVehiculeId() +", date="+object.getDate()+", end_date="+((Lease) object).getEndDate()+
-                    ", type="+object.getType()+" WHERE id="+id+";";
+
+            Lease lease = (Lease) object;
+            String end_date = DateExtensionKt.getTimestamp(lease.getEndDate());
+
+            String update = "UPDATE orders SET "+
+                    "cost="+object.getCost()+", supplier_id="+object.getSupplierId()+", vehicule_id="+
+                    object.getVehiculeId() +", date='"+start_date+"', end_date='"+end_date+
+                    "', type='"+object.getType()+"' WHERE id="+id+";";
+
             mysql.executeUpdate(update);
+
         }
 
     }

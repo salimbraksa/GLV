@@ -47,8 +47,8 @@ public class VehiculeStore implements StoreType<Vehicule>, Filterable<Vehicule> 
 
         String query = "UPDATE vehicule " +
                 "SET type='"+object.getType()+"', price='"+object.getPrice()+"', state='"+object.getState().rawValue()+
-                "' WHERE id="+id;
-
+                "', currentStock=" + object.getCurrentStock() + ", totalStock=" + object.getTotalStock() + " WHERE id="+id;
+        System.out.println(query);
         mysql.executeUpdate(query);
 
     }

@@ -4,6 +4,7 @@ import com.sun.org.apache.regexp.internal.RE;
 import helpers.extensions.DateExtensionKt;
 import helpers.interfaces.Filterable;
 import models.Rent;
+import models.Vehicule;
 import services.factories.RentFactory;
 import services.mysql.Mysql;
 
@@ -35,12 +36,24 @@ public class RentStore implements StoreType<Rent>, Filterable<Rent>{
 
     @Override
     public void create(Rent object) {
+
+        // Get the vehicle
+        Vehicule vehicle = VehiculeStore.sharedInstance().find(object.getVehiculeId());
+        if (vehicle.getCurrentStock() == 0) { return; }
+
         String start_date = DateExtensionKt.getTimestamp(object.getStartDate());
         String end_date = DateExtensionKt.getTimestamp(object.getEndDate());
-        String query = "INSERT INTO rent (vehicule_id,customer_id,start_date,end_date,pickup_location," + ",drop_location) VALUES ('"+object.getVehiculeId()
+        String query = "INSERT INTO rent (vehicule_id,customer_id,start_date,end_date,pickup_location,drop_location) VALUES ('"+object.getVehiculeId()
                 +"','"+object.getCustomerId()+"','"+start_date+"','"+end_date+"','"+object.getPickupLocation()
                 +"','" +object.getDropLocation()+"');";
-        mysql.executeUpdate(query);
+        System.out.println(query);
+        if (mysql.executeUpdate(query)) {
+
+            vehicle.currentStock -= 1;
+            VehiculeStore.sharedInstance().update(vehicle.getId(), vehicle);
+
+        }
+
     }
 
     @Override
@@ -52,7 +65,10 @@ public class RentStore implements StoreType<Rent>, Filterable<Rent>{
     public void update(int id, Rent object) {
         String start_date = DateExtensionKt.getTimestamp(object.getStartDate());
         String end_date = DateExtensionKt.getTimestamp(object.getEndDate());
-        String query = "";
+        String query = "Update Rent SET customer_id="+object.getCustomerId()+", vehicule_id="+object.getVehiculeId()+", start_date='"
+                        +start_date+ "', end_date='"+end_date+"', pickup_location='"+object.getPickupLocation()+"', " +
+                        " drop_location='"+ object.getDropLocation() +"'";
+        System.out.println(query);
         mysql.executeUpdate(query);
     }
 

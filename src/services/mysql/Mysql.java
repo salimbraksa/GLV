@@ -53,7 +53,7 @@ public class Mysql {
         return null;
     }
 
-    public void executeUpdate(String update) {
+    public boolean executeUpdate(String update) {
         Statement stmt = null;
         try {
             connect();
@@ -61,8 +61,10 @@ public class Mysql {
             stmt.executeUpdate(update);
             stmt.close();
             connection.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

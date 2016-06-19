@@ -6,17 +6,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import models.Customer;
+import models.*;
 import models.Rent;
-import models.User;
-import models.Vehicule;
 import services.stores.CustomerStore;
+import services.stores.RentStore;
 import services.stores.VehiculeStore;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -72,6 +72,67 @@ public class RentFormController extends FormController<Rent> implements Initiali
 
         LocalDate endLocalDate = rent.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         endDate.setValue(endLocalDate);
+
+    }
+
+    // User Interaction
+
+    @FXML
+    private void doneAction() {
+
+        // Gather data from text fields
+        Rent rent = buildRent();
+
+        // Add this employee to the database
+        RentStore.sharedInstance().create(rent);
+
+        // Let the delegate handles the rest
+        delegate.didUpdateDatabase();
+
+        // Then close this window
+        cancelAction();
+
+    }
+
+    @FXML
+    public void editAction() {
+
+        // Gather data from text fields
+        Rent rent = buildRent();
+
+        // Add this employee to the database
+        RentStore.sharedInstance().update(rent.getId(), rent);
+
+        // Let the delegate handles the rest
+        delegate.didUpdateDatabase();
+
+        // Then close this window
+        cancelAction();
+
+    }
+
+    private Rent buildRent() {
+
+        String pickup = this.pickup.getText();
+        String drop = this.drop.getText();
+        Customer customer = this.customerBox.getValue();
+        Vehicule vehicle = this.vehicleBox.getValue();
+
+        LocalDate localStartDate = this.startDate.getValue();
+        LocalDate localEndDate = this.endDate.getValue();
+        Date startDate = Date.from(localStartDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(localEndDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        Rent rent;
+        // Instantiate the employee
+
+        int id = -1;
+        if ( model instanceof Rent ) {
+            id = ((Rent) model).getId();
+        }
+        rent = new Rent(id, vehicle.getId(), customer.getId(), startDate, endDate, pickup, drop);
+
+        return rent;
 
     }
 

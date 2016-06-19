@@ -45,9 +45,9 @@ public class OrderFactory {
             e.printStackTrace();
         }
 
-        if (type.equals("order")) {
+        if (type.equals("Order")) {
             return new Order(id, coast, date, supplier_id, vehicule_id);
-        } else if (type.equals("lease")) {
+        } else if (type.equals("Lease")) {
             return new Lease(id, coast, date, supplier_id, vehicule_id, endDate);
         }
         return null;
