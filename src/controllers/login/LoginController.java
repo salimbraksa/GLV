@@ -10,7 +10,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import models.Employee;
 import models.User;
+import services.CanCanCan.CanCanCan;
 import services.authentication.Authentication;
 import services.authentication.AuthenticationDelegate;
 
@@ -55,6 +57,12 @@ public class LoginController extends Controller implements AuthenticationDelegat
 
         // Set this user
         Shared.currentUser = user;
+
+        // Set up CanCanCan
+        CanCanCan ability = new CanCanCan((Employee) user);
+        Shared.ability = ability;
+
+        System.out.print("ABILITY: " + Shared.ability.cannot("manage employee"));
 
         // Open dashboard
         ControllerLoader loader = new ControllerLoader("/views/home/home.fxml");

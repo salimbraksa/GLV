@@ -1,5 +1,6 @@
 import controllers.Controller;
 import helpers.ControllerLoader;
+import helpers.shared.Shared;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,7 @@ import models.Employee;
 import models.Order;
 import models.Supplier;
 import models.Vehicule;
+import services.CanCanCan.CanCanCan;
 import services.factories.OrderFactory;
 import services.stores.EmployeeStore;
 import services.stores.OrderStore;

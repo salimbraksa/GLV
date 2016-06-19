@@ -13,53 +13,37 @@ import java.util.Arrays;
 public class CanCanCan {
     // Attributes
 
-    private ArrayList<String> abilities;
+    private ArrayList<String> disabilities;
 
     //Methods
 
     public CanCanCan(Employee employee){
-        String [] managerAbilities = { "add customer", "edit customer", "show customer",
-                "add rent", "edit rent", "show rent",
-                "show vehicule",
-                "show order",
-                "add lease", "edit lease", "show lease",
-                "show supplier",
-        };
 
-        String [] additionalAbilities = { "add employee", "edit employee", "show employee", "delete employee",
-                "delete customer",
-                "delete rent",
-                "add vehicule", "edit vehicule", "delete vehicule",
-                "add order", "edit order", "delete order",
-                "delete lease",
-                "add supplier", "edit supplier", "delete supplier",
-        };
+        // Init disabilities
+        disabilities = new ArrayList<>();
 
-        can(managerAbilities);
+        // The admin can do everything
+        if (employee instanceof Admin) { return; }
 
-        if (employee instanceof Admin){
-            can(additionalAbilities);
-        }
+        // However ...
+        String[] disabilities = new String[10];
+        disabilities[0] = "manage employee";
+        disabilities[1] = "delete resource";
+        disabilities[2] = "add vehicle";
+        disabilities[3] = "edit vehicle";
+        disabilities[4] = "manage supplier";
+        disabilities[5] = "manage order";
+        addDisabilities(disabilities);
 
     }
 
-    public void can(String ability){
-        abilities.add(ability);
+    public void addDisabilities(String [] disabilities){
+        this.disabilities.addAll(Arrays.asList(disabilities));
     }
 
-    public void can(String [] abilities){
-        this.abilities.addAll(Arrays.asList(abilities));
+    public boolean cannot(String disability) {
+        return disabilities.contains(disability);
     }
 
-    public boolean hasAbility(String ability) {
-
-        if (abilities.contains(ability)){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    }
+}
 

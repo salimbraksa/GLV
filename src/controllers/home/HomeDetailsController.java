@@ -8,6 +8,7 @@ import helpers.SBError;
 import helpers.detailsViewHelpers.DetailsViewHelper;
 import helpers.detailsViewHelpers.EmployeeDetailsViewHelper;
 import helpers.interfaces.DetailsViewDataSource;
+import helpers.shared.Shared;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -42,7 +43,6 @@ public class HomeDetailsController extends Controller implements FormControllerD
     @FXML private Label leftSummaryName;
     @FXML private Label rightSummaryValue;
     @FXML private Label rightSummaryName;
-    @FXML private TextField filterField;
 
     @FXML private TableView<Object> tableView;
 
@@ -98,6 +98,13 @@ public class HomeDetailsController extends Controller implements FormControllerD
     @FXML
     private void addNewItem() {
 
+        // Vehicle ability
+        if (associatedModel == AppModels.Vehicle && Shared.ability.cannot("add vehicle")) {
+            SBError error = new SBError("Error", "Admin privilege is required to perform this action");
+            showError(error);
+            return;
+        }
+
         // Get appropriate form
         FormController<?> formController = associatedModel.getFormController(FormController.FormType.New);
         formController.delegate = this;
@@ -109,6 +116,13 @@ public class HomeDetailsController extends Controller implements FormControllerD
 
     @FXML
     private void editItem() {
+
+        // Vehicle ability
+        if (associatedModel == AppModels.Vehicle && Shared.ability.cannot("edit vehicle")) {
+            SBError error = new SBError("Error", "Admin privilege is required to perform this action");
+            showError(error);
+            return;
+        }
 
         // Get appropriate form
         FormController<?> formController = associatedModel.getFormController(FormController.FormType.Edit);
@@ -146,6 +160,13 @@ public class HomeDetailsController extends Controller implements FormControllerD
 
     @FXML
     private void deleteItem() {
+
+        // Check if employee is allowed to perform this action
+        if (Shared.ability.cannot("delete resource")) {
+            SBError error = new SBError("Error", "Admin privilege is required to perform this action");
+            showError(error);
+            return;
+        }
 
         // Check if an item is not selected
         if (!itemIsSelected()) {

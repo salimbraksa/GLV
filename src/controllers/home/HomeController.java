@@ -8,6 +8,7 @@ import helpers.ControllerLoader;
 import helpers.detailsViewHelpers.*;
 import helpers.detailsViewDataSources.*;
 import helpers.interfaces.DetailsViewDataSource;
+import helpers.shared.Shared;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -52,13 +53,27 @@ public class HomeController extends Controller implements Initializable, FormCon
     public HomeController() {
 
         menuItems = FXCollections.observableArrayList();
-        MenuItemModel employeesItem = new MenuItemModel("Employees", AppModels.Employee, FontAwesomeIcon.USER);
+
+        if (!Shared.ability.cannot("manage employee")) {
+            MenuItemModel employeesItem = new MenuItemModel("Employees", AppModels.Employee, FontAwesomeIcon.USER);
+            menuItems.add(employeesItem);
+        }
+
         MenuItemModel customersItem = new MenuItemModel("Customers", AppModels.Customer, FontAwesomeIcon.USERS);
         MenuItemModel rentsItem = new MenuItemModel("Rents", AppModels.Rent, FontAwesomeIcon.HOME);
         MenuItemModel vehiclesItem = new MenuItemModel("Vehicles", AppModels.Vehicle, FontAwesomeIcon.CAR);
-        MenuItemModel suppliersItem = new MenuItemModel("Suppliers", AppModels.Supplier, FontAwesomeIcon.INDUSTRY);
-        MenuItemModel moneyItem = new MenuItemModel("Orders", AppModels.Order, FontAwesomeIcon.MONEY);
-        menuItems.addAll(employeesItem, customersItem, rentsItem, vehiclesItem, suppliersItem, moneyItem);
+
+        menuItems.addAll(customersItem, rentsItem, vehiclesItem);
+
+        if (!Shared.ability.cannot("manage supplier")) {
+            MenuItemModel suppliersItem = new MenuItemModel("Suppliers", AppModels.Supplier, FontAwesomeIcon.INDUSTRY);
+            menuItems.add(suppliersItem);
+        }
+
+        if (!Shared.ability.cannot("manage order")) {
+            MenuItemModel moneyItem = new MenuItemModel("Orders", AppModels.Order, FontAwesomeIcon.MONEY);
+            menuItems.add(moneyItem);
+        }
 
     }
 
