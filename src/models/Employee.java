@@ -44,19 +44,19 @@ public abstract class Employee extends User{
     @Override
     public ArrayList<Error> validate(Map<String, Object> additionalInfos) {
         ArrayList<Error> listErrors = new ArrayList<>();
-        if (this.getFirstName() == null){
+        if (this.getFirstName() == null || this.getFirstName().isEmpty() ){
             SBError error = new SBError("Empty Field","The attribute 'first name' is required");
             listErrors.add(error);
         }
-        if (this.getLastName() == null){
+        if (this.getLastName() == null || this.getLastName().isEmpty() ){
             SBError error = new SBError("Empty Field","The attribute 'last name' is required");
             listErrors.add(error);
         }
-        if (this.getPhone() == null){
+        if (this.getPhone() == null || this.getPhone().isEmpty() ){
             SBError error = new SBError("Empty Field","The attribute 'phone' is required");
             listErrors.add(error);
         }
-        if (this.getEmail() == null){
+        if (this.getEmail() == null || this.getEmail().isEmpty() ){
             SBError error = new SBError("Empty Field","The attribute 'email' is required");
             listErrors.add(error);
         }
@@ -68,14 +68,14 @@ public abstract class Employee extends User{
             SBError error = new SBError("Empty Field","The attribute 'role' is required");
             listErrors.add(error);
         }
-        if (this.getPassword() == null){
+        if (this.getPassword() == null || this.getPassword().isEmpty() ){
             SBError error = new SBError("Empty Field","The attribute 'password' is required");
             listErrors.add(error);
         }
         else {
             String confirmationPassword = "confirmationPassword";
             if (additionalInfos.containsKey(confirmationPassword)){
-                if (additionalInfos.get(confirmationPassword)!=this.getPassword()){
+                if (!additionalInfos.get(confirmationPassword).equals(this.getPassword())){
                     SBError error = new SBError("invalid Password","The two passwords don't match");
                     listErrors.add(error);
                 }

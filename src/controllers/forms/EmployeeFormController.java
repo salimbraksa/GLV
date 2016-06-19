@@ -1,5 +1,6 @@
 package controllers.forms;
 
+import helpers.SBError;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -10,6 +11,9 @@ import models.User;
 import services.stores.EmployeeStore;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -61,6 +65,7 @@ public class EmployeeFormController extends FormController<Employee> implements 
 
         // Gather data from text fields
         Employee employee = buildEmployee();
+        if (employee == null) { return; }
 
         // Add this employee to the database
         EmployeeStore.sharedInstance().create(employee);
@@ -77,6 +82,8 @@ public class EmployeeFormController extends FormController<Employee> implements 
     public void editAction() {
 
         Employee employee = buildEmployee();
+        if (employee == null) { return; }
+
         EmployeeStore.sharedInstance().update(employee.getId(), employee);
         delegate.didUpdateDatabase();
         cancelAction();
@@ -106,6 +113,23 @@ public class EmployeeFormController extends FormController<Employee> implements 
         } else if (role == Employee.Role.Admin) {
             employee = new Admin(id, firstName, lastName, gender, email, phone, password);
         }
+
+        HashMap<String, Object> additionalInfos = new HashMap<>();
+        additionalInfos.put("confirmationPassword", this.passwordConfirmation.getText());
+        ArrayList<Error> errors = employee.validate(additionalInfos);
+        SBError error = null;
+        if (errors.size() != 0) {
+            error = (SBError) errors.get(0);
+        }
+        if (error != null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(error.getTitle());
+            alert.setHeaderText(null);
+            alert.setContentText(error.getMessage());
+            alert.showAndWait();
+            return null;
+        }
+
         return employee;
 
     }
