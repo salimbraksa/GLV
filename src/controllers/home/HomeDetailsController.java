@@ -81,9 +81,7 @@ public class HomeDetailsController extends Controller implements FormControllerD
         }
 
         // Initialize filter
-        if (filter == null ) {
-            // filter = new TableFilter(tableView);
-        }
+        filter = new TableFilter(tableView);
 
         // Update data
         data.clear();
